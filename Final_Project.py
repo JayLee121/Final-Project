@@ -5,7 +5,7 @@ def get_restaurant_data(資料.txt):
     讀檔案進來並記在資料的字典  # key 是餐廳 value 是營業時間（半小時為單位）（資料處理）
     return data_dict
 
-def read_user_restaurant(person, res_data):
+def get_user_restaurant(person, res_data):
     while True:
         res = 點擊的餐廳  # 把介面上的東西換成能用的輸入
         if res == '選取完畢'：  # 當他點到選取完畢就結束選取
@@ -17,7 +17,7 @@ def read_user_restaurant(person, res_data):
     return res_data
 
 
-def read_user_time(person, time_data):
+def get_user_time(person, time_data):
     如同上面，只是把key改成時間（每半小時為單位）
 
     return time_data
@@ -42,12 +42,12 @@ time_dict = {'11:00':  1, '11:30': 2, '12:00': 3, '12:30': 4, '13:00': 5, '13:30
 
 start = True if 按下start else False
 if start:
-    people_num = 請輸入聚餐總人數的那格輸入
+    total_people = 請輸入聚餐總人數的那格輸入
 
     # 點擊想要的餐廳（現在先用兩個之後再增加）
     res_data = dict()
     time_data = dict() 
-    for person in range(people_num):
-        res_data = read_user_restaurant(person, res_data)
-        time_data = read_user_time(person, time_data)
+    for person in range(total_people):
+        res_data = get_user_restaurant(person, res_data)
+        time_data = get_user_time(person, time_data)
     get_best_RandT(res_data, time_data)
