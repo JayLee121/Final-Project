@@ -9,21 +9,18 @@ debug = True
 time_proportion = 1/2
 site_proportion = 1/3
 total_people = 3
-time_dic = {'6:00':['justin', '1243'], '6:10':['12345']}
-site_dic = {'justin': ['abc','cde'], '1243':['abc','okl'],'12345':['abc','opl'] }
-
 
 # 找出票數大於比例的 x_dict key:time or restaurant name / value :user's name 
-def filter_porportion(x_dict):
+def filter_porportion(x_dict, proportion):
     temp_x = []
     for key in x_dict.keys():
         num = len(x_dict[key])
-        if num >= total_people * time_proportion:temp_x.append([key, num])
-    accept_x = (sorted(temp_x, key=lambda x:x[1], reverse=True))
-    return accept_x
+        if num >= total_people * proportion:temp_x.append([key, num])
+    return temp_x
 
 # 找出最佳值，以及判斷是否有複數個最佳值
-def find_optimal(accept_x):
+def find_optimal(temp_x):
+    accept_x = (sorted(temp_x, key=lambda x:x[1], reverse=True))
     optimal_x = []
     optimal_x.append(accept_x[0][0])
     for i in range (1, len(accept_x)):
@@ -57,5 +54,3 @@ def match(time_dict, site_dict):
     accept_site = filter_porportion(site_vote)
     if len(accept_site) == 0: find_site = False
     if debug: print('accept_site:', accept_site)
-
-match (time_dic, site_dic)
