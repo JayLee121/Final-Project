@@ -11,7 +11,7 @@ site_proportion = 1/3
 total_people = 3
 
 # 找出票數大於比例的 x_dict key:time or restaurant name / value :user's name 
-def filter_porportion(x_dict):
+def filter_proportion(x_dict):
     temp_x = []
     for key in x_dict.keys():
         num = len(x_dict[key])
