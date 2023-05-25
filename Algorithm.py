@@ -10,6 +10,9 @@ time_proportion = 1/2
 site_proportion = 1/3
 total_people = 3
 
+'''time_dic = {'6:00':['justin', '1243'], '6:10':['12345']}
+site_dic = {'justin': ['abc','cde'], '1243':['abc','okl'],'12345':['abc','opl'] }'''
+
 # 找出票數大於比例的 x_dict key:time or restaurant name / value :user's name 
 def filter_proportion(x_dict, proportion):
     temp_x = []
@@ -30,7 +33,7 @@ def find_optimal(temp_x):
 def match(time_dict, site_dict):
     find_time, find_site = True, True
     # 可接受的時間
-    accept_time = filter_proportion(time_dict)
+    accept_time = filter_proportion(time_dict, time_proportion)
     if len(accept_time) == 0: find_time = False
     if debug: print('accept_time:', accept_time)
     
@@ -51,6 +54,8 @@ def match(time_dict, site_dict):
                     site_vote[site].append(name)
     
     # 可接受的餐廳
-    accept_site = filter_proportion(site_vote)
+    accept_site = filter_proportion(site_vote, site_proportion)
     if len(accept_site) == 0: find_site = False
     if debug: print('accept_site:', accept_site)
+
+#match (time_dic, site_dic)
