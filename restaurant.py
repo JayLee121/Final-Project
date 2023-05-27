@@ -17,7 +17,7 @@ class RestaurantPage:
             self.selected_boxes.append(checkbox_value)
 
     def get_selected_values(self):
-        restaurant_list = ['麥當勞','順園','辛殿','鍋in','貳樓']
+        restaurant_list = ['新生南路麥當勞','順園小館','辛殿公館店','鍋in','貳樓公館店']
 
         # 獲取選中複選框的值
         selected_values = []
@@ -28,7 +28,7 @@ class RestaurantPage:
 
     def create_checkboxes(self):
         # 生成時間段列表
-        restaurant_list = ['麥當勞','順園','辛殿','鍋in','貳樓']
+        restaurant_list = ['新生南路麥當勞','順園小館','辛殿公館店','鍋in','貳樓公館店']
         for i in range(5):
             row = []
             for j in range(1):
