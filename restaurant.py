@@ -46,11 +46,11 @@ class RestaurantPage:
     def create_menu(self):
         # 創建菜單超連結
         links = [
-    {"text": "新生南路麥當勞", "url": "https://reurl.cc/01oNN6"},
-    {"text": "順園小館", "url": "https://www.facebook.com/ShunYuanXiaoGuan/"},
+    {"text": "新生南路麥當勞", "url": "https://www.mcdonalds.com/tw/zh-tw/full-menu/extra-value-meals.html"},
+    {"text": "順園小館", "url": "https://www.facebook.com/media/set/?set=a.2412078992198401&type=3"},
     {"text": "辛殿公館店", "url": "https://inline.app/booking/-LDKPhTT6bNhwjRVHpC2/-MWbDrcVGUuDMkYvCrz7"},
-    {"text": "鍋in", "url": "https://reurl.cc/qL8DgE"},
-    {"text": "貳樓公館店", "url": "https://inline.app/booking/-KXKjbMyZzEgAYIwbVnO:inline-live-2ndfloor/-KXKl2l9ibJgpxUwqUf_"}]
+    {"text": "鍋in", "url": "https://images.app.goo.gl/2kgAHR8RuKyQtQ118"},
+    {"text": "貳樓公館店", "url": "https://www.secondfloorcafe.com/menu/"}]
         for i, link in enumerate(links):
             label = tk.Label(win1, text=link["text"], fg="black", cursor="hand2", bg='#f2d5a3', font=('Arial', 12,"bold"), width=23, height=2)
             label.grid( row=i+1, column = 10)
