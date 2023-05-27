@@ -1,6 +1,5 @@
 # Algorithm
 
-# input(使用者所選的時間,餐廳) 以dict()的方式傳輸，
 # 幫我整理好 time_dict 的 key = time  value = list.append(user's name)
 # 在傳入 time_dict 的時候要先切成每半小時為單位，key存成約的時間“點”（例如18:00)
 # site_dict key = use's name / value = list.append(site_name)
