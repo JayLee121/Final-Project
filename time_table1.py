@@ -1,7 +1,7 @@
 # Time_table
 import tkinter as tk
 class TimePage:
-    def __init__(self, win,cb):
+    def __init__(self, win, cb):
         self.win = win
         self.cb = cb
         self.checkboxes = []  # 儲存複選框的列表
