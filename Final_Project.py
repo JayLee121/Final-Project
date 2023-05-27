@@ -1,53 +1,52 @@
 # 一開始先import前端傳入的東西
 
-def get_restaurant_data(資料.txt):
-    data_dict = {}
-    讀檔案進來並記在資料的字典  # key 是餐廳 value 是營業時間（半小時為單位）（資料處理）
-    return data_dict
 
-def get_user_restaurant(person, res_data):
-    while True:
-        res = 點擊的餐廳  # 把介面上的東西換成能用的輸入
-        if res == '選取完畢'：  # 當他點到選取完畢就結束選取
-            break
-        if 餐廳資料裡面沒有「餐廳名稱」這個key:
-            res_data[餐廳名稱] = [人名]
-        if 沒有:
-            res_data[餐廳名稱].append(人名)
-    return res_data
+# import Algorithm
+from Algorithm.py import filter_proportion
+from Algorithm.py import find_optimal
+from Algorithm.py import match
+
+# try
+name_p = ['Amber', 'Steve', 'Jay']
+time_p = [[25, 26, 27, 34, 35, 36], [28, 29, 39, 40], [24]]
+site_p = [['麥當勞', '順園'], ['貳樓', '鍋in'] , ['辛殿']]
 
 
-def get_user_time(person, time_data):
-    如同上面，只是把key改成時間（每半小時為單位）
+def get_time_dict(time_p, name_p):
+    time_dict = {}
+    for i in time_p:
+        for time in i:
+            if time_p[i][j] not in time_dict:
+                time_dict[time_p[i][j]] = []
+                time_dict[time_p[i][j]].append(name_p[i])
+            else:
+                time_dict[time_p[i][j]].append(name_p[i])
+    return time_dict
 
-    return time_data
+def get_site_dict(site_p, name_p):
+    site_dict = {}
+    site_dict = {}
+    for i in site_p:
+        for site in i:
+            if site_p[i][j] not in site_dict:
+                site_dict[site_p[i][j]] = []
+                site_dict[site_p[i][j]].append(name_p[i])
+            else:
+                site_dict[site_p[i][j]].append(name_p[i])
+    return site_dict
 
-def get_best_RandT(餐廳資料, 時間資料)
 
-    input(使用者所選的時間以及餐廳)
-    for each in 時間資料的key: count amount of value
-sort number of votes
-    從最佳時間內，找出可以的人。（把這些人名記錄下來）
-    並且從可以的人中找出最佳的餐廳。（在判斷最佳餐廳時，只計算那些人名所投的餐廳）
-    if 最佳餐廳都沒有營業：
-        if 人數沒有小於一半
-                    找第二高票的餐廳
-                    以此類推
+time_data_dict = {'00:00': 1, '00:30': 2, '01:00': 3, '01:30': 4,
+             '02:00': 5, '02:30':6, '03:00': 7, '03:30': 8,
+             '04:00': 9, '04:30': 10, '05:00': 11, '05:30': 12,
+             '06:00': 13, '06:30': 14, '07:00': 15,'07:30': 16,
+             '08:00': 17, '08:30': 18, '09:00': 19, '09:30': 20,
+             '10:00': 21, '10:30': 22, '11:00': 23, '11:30': 24,
+             '12:00': 25, '12:30': 26, '13:00': 27, '13:30': 28,
+             '14:00': 29, '14:30': 30, '15:00': 31, '15:30': 32,
+             '16:00': 33, '16:30': 34, '17:00': 35, '17:30': 36,
+             '18:00': 37, '18:30': 38, '19:00': 39, '19:30': 40,
+             '20:00': 41, '20:30': 42, '21:00': 43, '21:30': 44,
+             '22:00': 45, '22:30': 46, '23:00': 47, '23:30': 48,}
 
-    if 最佳時間都沒有任何餐廳營業找第二高票的時間超過幾票？就選第三高票
 
-    return 最佳餐廳跟最佳時間
-==========================================
-time_dict = {'11:00':  1, '11:30': 2, '12:00': 3, '12:30': 4, '13:00': 5, '13:30':6, '14:00': 7, '14:30': 8, '15:00': 9, '17:00': 10, '17:30': 11, '18:00': 12, '18:30': 13, '19:00': 14, '19:30': 15, '20:00': 16, '20:30': 17, '21:00': 18}
-
-start = True if 按下start else False
-if start:
-    total_people = 請輸入聚餐總人數的那格輸入
-
-    # 點擊想要的餐廳（現在先用兩個之後再增加）
-    res_data = dict()
-    time_data = dict() 
-    for person in range(total_people):
-        res_data = get_user_restaurant(person, res_data)
-        time_data = get_user_time(person, time_data)
-    get_best_RandT(res_data, time_data)
