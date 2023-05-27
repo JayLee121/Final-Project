@@ -1,11 +1,19 @@
 # Time_table
 import tkinter as tk
+
 class TimePage:
-    def __init__(self, win,cb):
+    def __init__(self, win, cb):
         self.win = win
         self.cb = cb
         self.checkboxes = []  # 儲存複選框的列表
         self.selected_boxes = []  # 儲存選中複選框的值的列表
+        self.components = { 'bt': tk.Button(win, text='Save Selected', command=self.cb),
+                            }
+
+    
+    def layout (self):
+        self.components['bt'].grid(column=50, row=50)
+
 
     def checkbox_clicked(self, checkbox_value):
         # 複選框點擊事件處理函數
@@ -34,45 +42,28 @@ class TimePage:
             self.checkboxes.append(row)
 
 
-    def create_bt(self):
-        # 創建按鈕
-        self.bt4 = tk.Button(self.win, text='Save Selected', command=self.cb)
-        self.bt4.grid(row=9, column=0)  # 將按鈕放置到指定的行和列
-        
-    def create_menu(self):
-        # 創建菜單
-        links = [
-    {"text": "新生南路麥當勞", "url": "https://reurl.cc/01oNN6"},
-    {"text": "順園小館", "url": "https://www.facebook.com/ShunYuanXiaoGuan/"},
-    {"text": "辛殿公館店", "url": "https://inline.app/booking/-LDKPhTT6bNhwjRVHpC2/-MWbDrcVGUuDMkYvCrz7"},
-    {"text": "鍋in", "url": "https://reurl.cc/qL8DgE"},
-    {"text": "貳樓公館店", "url": "https://inline.app/booking/-KXKjbMyZzEgAYIwbVnO:inline-live-2ndfloor/-KXKl2l9ibJgpxUwqUf_"}]
-        for i, link in enumerate(links):
-            label = tk.Label(win1, text=link["text"], fg="black", cursor="hand2")
-            label.grid(row=i, column = 10)
-            label.bind("<Button-1>", lambda e, url=link["url"]: webbrowser.open_new(url))
-
     def show(self):
+        for _, item in self.components.items():
+            item.grid()
         self.create_checkboxes()
-        self.create_bt()
-        self.create_menu()
     
-    def conceal(self):
+    def hide(self):
         for row in self.checkboxes:
             for box in row:
                 box.grid_remove()
         
-        self.bt4.grid_remove()
+        for _, item in self.components.items():
+            item.grid_remove()
 
 if __name__ == '__main__':
     import tkinter as tk
 
-    win1 = tk.Tk()
-    win1.geometry('1280x720')
-    win1.title('一起聚餐吧')
+    win = tk.Tk()
+    win.geometry('1280x720')
+    win.title('一起聚餐吧')
     
-    win1.configure(bg='#f2d5a3')
-    page = TimePage(win1)
+    win.configure(bg='#f2d5a3')
+    page = TimePage(win)
     page.show()
 
-    win1.mainloop()
+    win.mainloop()
