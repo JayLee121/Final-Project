@@ -38,10 +38,24 @@ class TimePage:
         # 創建按鈕
         self.bt4 = tk.Button(self.win, text='Save Selected', command=self.cb)
         self.bt4.grid(row=9, column=0)  # 將按鈕放置到指定的行和列
+        
+    def create_menu(self):
+        # 創建菜單
+        links = [
+    {"text": "新生南路麥當勞", "url": "https://reurl.cc/01oNN6"},
+    {"text": "順園小館", "url": "https://www.facebook.com/ShunYuanXiaoGuan/"},
+    {"text": "辛殿公館店", "url": "https://inline.app/booking/-LDKPhTT6bNhwjRVHpC2/-MWbDrcVGUuDMkYvCrz7"},
+    {"text": "鍋in", "url": "https://reurl.cc/qL8DgE"},
+    {"text": "貳樓公館店", "url": "https://inline.app/booking/-KXKjbMyZzEgAYIwbVnO:inline-live-2ndfloor/-KXKl2l9ibJgpxUwqUf_"}]
+        for i, link in enumerate(links):
+            label = tk.Label(win1, text=link["text"], fg="black", cursor="hand2")
+            label.grid(row=i, column = 10)
+            label.bind("<Button-1>", lambda e, url=link["url"]: webbrowser.open_new(url))
 
     def show(self):
         self.create_checkboxes()
         self.create_bt()
+        self.create_menu()
     
     def conceal(self):
         for row in self.checkboxes:
