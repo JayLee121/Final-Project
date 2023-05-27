@@ -76,7 +76,7 @@ class RestaurantPage:
 
 if __name__ == '__main__':
     import tkinter as tk
-
+    import webbrowser
     win1 = tk.Tk()
     win1.geometry('1280x720')
     win1.title('一起聚餐吧')
