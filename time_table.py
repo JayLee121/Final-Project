@@ -1,8 +1,9 @@
 # Time_table
-
-class CheckboxPage:
-    def __init__(self, win):
+import tkinter as tk
+class TimePage:
+    def __init__(self, win,cb):
         self.win = win
+        self.cb = cb
         self.checkboxes = []  # 儲存複選框的列表
         self.selected_boxes = []  # 儲存選中複選框的值的列表
 
@@ -13,12 +14,12 @@ class CheckboxPage:
         else:
             self.selected_boxes.append(checkbox_value)
         
-    def get_selected_values(self):
+    def get_result(self):
         # 獲取選中複選框的值
         selected_values = []
         for checkbox_value in self.selected_boxes:
             selected_values.append(checkbox_value)
-        print("Selected values:", selected_values)
+        return selected_values
 
     def create_checkboxes(self):
         # 生成時間段列表
@@ -35,7 +36,7 @@ class CheckboxPage:
 
     def create_bt(self):
         # 創建按鈕
-        self.bt4 = tk.Button(self.win, text='Save Selected', command=lambda :(self.get_selected_values(), self.conceal()))
+        self.bt4 = tk.Button(self.win, text='Save Selected', command=self.cb)
         self.bt4.grid(row=9, column=0)  # 將按鈕放置到指定的行和列
 
     def show(self):
@@ -57,7 +58,7 @@ if __name__ == '__main__':
     win1.title('一起聚餐吧')
     
     win1.configure(bg='#f2d5a3')
-    page = CheckboxPage(win1)
+    page = TimePage(win1)
     page.show()
 
     win1.mainloop()
