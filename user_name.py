@@ -50,7 +50,7 @@ if __name__ == '__main__':
     frame = tk.Frame(win1, width=15)  # 建立 Frame
     frame.grid(row=0, column=0)  
 
-    p2 = UserName(win1)
+    p2 = UserName(win1, lambda:p2.hide())
     p2.show()
 
 

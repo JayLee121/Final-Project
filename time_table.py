@@ -7,7 +7,7 @@ class TimePage:
         self.cb = cb
         self.checkboxes = []  # 儲存複選框的列表
         self.selected_boxes = []  # 儲存選中複選框的值的列表
-        self.components = { 'bt': tk.Button(win, text='Save Selected', command=self.cb),
+        self.components = {'bt': tk.Button(win, text='Save Selected', command=self.cb),
                             }
 
     
@@ -37,7 +37,7 @@ class TimePage:
             for j in range(6):
                 checkbox_value = i * 6 + j + 1  # 計算複選框對應的值
                 checkbox = tk.Checkbutton(self.win, text=time_list[checkbox_value-1], command=lambda value=checkbox_value: self.checkbox_clicked(value))
-                checkbox.grid(row=i, column=j)  # 將複選框放置到指定的行和列
+                checkbox.grid(row=i+3, column=j+3)  # 將複選框放置到指定的行和列
                 row.append(checkbox)
             self.checkboxes.append(row)
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     win.title('一起聚餐吧')
     
     win.configure(bg='#f2d5a3')
-    page = TimePage(win)
+    page = TimePage(win, lambda:page.hide())
     page.show()
 
     win.mainloop()
