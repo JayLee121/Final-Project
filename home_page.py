@@ -23,12 +23,13 @@ class HomePage():
 
 
     def show(self):
+        self.layout()
         for _, item in self.components.items():
-            item.grid()
+            item.place()
 
     def hide(self):
         for _, item in self.components.items():
-            item.grid_remove()
+            item.place_forget()
 
 
 if __name__ == '__main__':
