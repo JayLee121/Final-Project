@@ -24,7 +24,7 @@ class HomePage():
 
 import tkinter as tk
 
-if __name__ = '__main__':
+if __name__ == '__main__':
 
     win1 = tk.Tk()
     win1.geometry('1280x720')
