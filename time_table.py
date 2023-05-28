@@ -6,12 +6,14 @@ class TimePage:
         self.cb = cb
         self.checkboxes = []  # 儲存複選框的列表
         self.selected_boxes = []  # 儲存選中複選框的值的列表
-        self.components = {'bt': tk.Button(win, text='Save Selected', bg='#f2d5a3', command=self.cb)}
-        self.lb = tk.Label(win, text='\\  請點選你有空的時間  /', font=('Arail', 30), bg='#f2d5a3')
+        self.components = {'bt': tk.Button(win, text='Save Selected', bg='#f2d5a3', command=self.cb),
+                           'lb':tk.Label(win, text='\\  請點選你有空的時間  /', font=('Arail', 30), bg='#f2d5a3'),
+                            }
 
     # 好像可以不用這段
-    #def layout(self):
-        #self.components['bt'].place(anchor="center", x=600, y=600)
+    def layout(self):
+        self.components['bt'].place(anchor="center", x=600, y=600)
+        self.components['lb'].place(anchor="center", relx=0.5, rely=0.2)
 
     def checkbox_clicked(self, checkbox_value):
         # 複選框點擊事件處理函數
@@ -51,18 +53,17 @@ class TimePage:
 
 
     def show(self):
-        for _, item in self.components.items():  # 也就是'Save Selected'按鈕的位置            
-            item.place(anchor="center", relx=0.5, rely=0.75)
-
+        self.layout()
         self.create_checkboxes()
-        self.lb.place(anchor="center", relx=0.5, rely=0.2)
 
 
     def hide(self):
         for box in self.checkboxes:
             box.place_forget()
-        self.bt.place_forget()
-        self.lb.place_forget()
+        
+        for _, item in self.components.items():
+            item.place_forget()
+  
 
 
 if __name__ == '__main__':
@@ -74,7 +75,7 @@ if __name__ == '__main__':
         selected_values = page.get_result()
         print('Selected values:', selected_values)
 
-    page = TimePage(win, save_selected)
+    page = TimePage(win, lambda:page.hide())
     page.show()
 
     win.mainloop()
