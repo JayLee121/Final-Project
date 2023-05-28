@@ -7,7 +7,7 @@ class UserName():
         self.win = win
         self.cb = cb
         
-            self.components = {
+        self.components = {
             'lb3_1': tk.Label(win, text='你的名字：', fg='black', bg='#f5ebe0', font=('Arial', 12), width=20, height=2),
             'et3': tk.Entry(win, show=None),
             'lbtitle': tk.Label(win, text='\n一起聚餐吧\n', fg='black', bg='#f2d5a3', font=('Arial', 22, "bold"), width=30,
@@ -38,7 +38,7 @@ class UserName():
             item.place_forget()
             
     def get_result(self):
-        name = self.et3.get()
+        name = self.components['et3'].get()
         return name
 
 
