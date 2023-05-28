@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class UserName():
-    def __init__(self, win, cb, frame):
+    def __init__(self, win, cb, frame, name_list):
             self.win = win
             self.cb = cb
             self.frame = frame
@@ -60,7 +60,7 @@ if __name__ == '__main__':
         name_list.append(page.get_result())
         page.hide()
    
-    page = UserName(win1, call_back ,frame)
+    page = UserName(win1, call_back ,frame, name_list)
     page.show()
 
     win1.mainloop()
