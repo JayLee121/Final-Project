@@ -12,23 +12,34 @@ class RestaurantPage:
         self.images = []
         self.labels = []  # 儲存超連結菜單的列表
         self.image_labels = []  # 儲存圖片的列表
-
+        self.components = {'bt5':tk.Button(self.win, text='Save Selected', command=self.cb),
+                           'bt6':tk.Button(self.win, text='結束填寫', command=self.over),
+                           'menulabel':tk.Label(self.win, text="點選餐廳看菜單！", fg='black', bg='#f2d5a3', font=('Arial', 20,"bold"), width=23, height=2),
+                           }
+        self.links = [
+            {"text": "新生南路麥當勞", "url": "https://www.mcdonalds.com/tw/zh-tw/full-menu/extra-value-meals.html"},
+            {"text": "順園小館", "url": "https://www.facebook.com/media/set/?set=a.2412078992198401&type=3"},
+            {"text": "辛殿公館店", "url": "https://inline.app/booking/-LDKPhTT6bNhwjRVHpC2/-MWbDrcVGUuDMkYvCrz7"},
+            {"text": "鍋in", "url": "https://images.app.goo.gl/2kgAHR8RuKyQtQ118"},
+            {"text": "貳樓公館店", "url": "https://www.secondfloorcafe.com/menu/"}]
+        
+        self.load_images()
+    
+    def load_images(self):
+        #image_paths = ["餐廳首圖_麥當勞(780x585).jpeg", "餐廳首圖_順園(4000 x 2925).webp", "餐廳首圖_辛殿(2280 x912).webp", "餐廳首圖_鍋in(600x600).jpeg", "餐廳首圖_貳樓(1920x1280).jpeg"]
+        image_paths = ["餐廳首圖_麥當勞.jpg", "餐廳首圖_順園.jpg", "餐廳首圖_辛殿.jpg", "餐廳首圖_鍋in.jpg", "餐廳首圖_貳樓.jpg"]
+        for path in image_paths:
+            image = Image.open(path)
+            image = self.resize_and_crop_image(image)
+            self.images.append(ImageTk.PhotoImage(image))
+    
     def checkbox_clicked(self, checkbox_value):
         # 複選框點擊事件處理函數
         if checkbox_value in self.selected_boxes:
             self.selected_boxes.remove(checkbox_value)
         else:
             self.selected_boxes.append(checkbox_value)
-
-    def get_selected_values(self):
-        restaurant_list = ['新生南路麥當勞','順園小館','辛殿公館店','鍋in','貳樓公館店']
-
-        # 獲取選中複選框的值
-        selected_values = []
-        for checkbox_value in self.selected_boxes:
-            selected_values.append(restaurant_list[checkbox_value - 1])
-        print("Selected values:", selected_values)
-
+                    
     def create_checkboxes(self):
         # 生成時間段列表
         restaurant_list = ['新生南路麥當勞','順園小館','辛殿公館店','鍋in','貳樓公館店']
@@ -41,19 +52,13 @@ class RestaurantPage:
                 row.append(checkbox)
             self.checkboxes.append(row)
 
-    def create_bt(self):
-        # 創建按鈕
-        self.bt5 = tk.Button(self.win, text='Save Selected', command=self.cb)
-        self.bt6 = tk.Button(self.win, text='結束填寫', command=self.over)
-        self.bt5.place(x=20, y=650)  # 將按鈕放置到指定的行和列
-        self.bt6.place(x=120, y=650)
-    def load_images(self):
-        #image_paths = ["餐廳首圖_麥當勞(780x585).jpeg", "餐廳首圖_順園(4000 x 2925).webp", "餐廳首圖_辛殿(2280 x912).webp", "餐廳首圖_鍋in(600x600).jpeg", "餐廳首圖_貳樓(1920x1280).jpeg"]
-        image_paths = ["餐廳首圖_麥當勞.jpg", "餐廳首圖_順園.jpg", "餐廳首圖_辛殿.jpg", "餐廳首圖_鍋in.jpg", "餐廳首圖_貳樓.jpg"]
-        for path in image_paths:
-            image = Image.open(path)
-            image = self.resize_and_crop_image(image)
-            self.images.append(ImageTk.PhotoImage(image))
+    def layout(self):
+        self.components['bt5'].place(x=20, y=650)  # 將按鈕放置到指定的行和列
+        self.components['bt6'].place(x=120, y=650)
+        self.components['menulabel'].place(x=150 , y=10)
+        self.create_checkboxes()
+    
+
 
     def resize_and_crop_image(self, image):
         new_width = 160
@@ -77,30 +82,28 @@ class RestaurantPage:
 
     def create_menu(self):
         # 創建菜單超連結
-        links = [
-            {"text": "新生南路麥當勞", "url": "https://www.mcdonalds.com/tw/zh-tw/full-menu/extra-value-meals.html"},
-            {"text": "順園小館", "url": "https://www.facebook.com/media/set/?set=a.2412078992198401&type=3"},
-            {"text": "辛殿公館店", "url": "https://inline.app/booking/-LDKPhTT6bNhwjRVHpC2/-MWbDrcVGUuDMkYvCrz7"},
-            {"text": "鍋in", "url": "https://images.app.goo.gl/2kgAHR8RuKyQtQ118"},
-            {"text": "貳樓公館店", "url": "https://www.secondfloorcafe.com/menu/"}]
-        for i, link in enumerate(links):
+        for i, link in enumerate(self.links):
             label = tk.Label(self.win, text=link["text"], fg="black", cursor="hand2", bg='#f2d5a3', font=('Arial', 12,"bold"), width=23, height=2)
             label.place(x=200, y=60 + i * 110)
             label.bind("<Button-1>", lambda e, url=link["url"]: webbrowser.open_new(url))
             self.labels.append(label)
-
-    def create_label(self):
-        # 創建label
-        self.menulabel = tk.Label(self.win, text="點選餐廳看菜單！", fg='black', bg='#f2d5a3', font=('Arial', 20,"bold"), width=23, height=2)
-        self.menulabel.place(x=150 , y=10)
-
+    
+    def get_selected_values(self):
+        restaurant_list = ['新生南路麥當勞','順園小館','辛殿公館店','鍋in','貳樓公館店']
+        # 獲取選中複選框的值
+        selected_values = []
+        if len(self.selected_boxes) != 0:
+            for checkbox_value in self.selected_boxes:
+                selected_values.append(checkbox_value)
+ 
+        return selected_values
+            
     def show(self):
         self.create_checkboxes()
-        self.create_bt()
-        self.load_images()
         self.display_images()
         self.create_menu()
-        self.create_label()
+        self.layout()
+
 
     def hide(self):
         for row in self.checkboxes:
@@ -112,9 +115,10 @@ class RestaurantPage:
 
         for image_label in self.image_labels:
             image_label.place_forget()
-        self.menulabel.place_forget()
-        self.bt5.place_forget()
-        self.bt6.place_forget()
+        
+        for _, item in self.components.items():
+            item.place_forget()
+
 
 
 
@@ -127,6 +131,7 @@ if __name__ == '__main__':
     def cb():
         page.hide()
         page.get_selected_values()
+        print(page.get_selected_values())
     def rest_over():
         page.hide()
 

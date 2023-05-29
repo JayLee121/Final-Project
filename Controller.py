@@ -4,10 +4,10 @@ import tkinter as tk
 
 name_list = []
 available_time = []
+rest_list = []
 
 def home_cb():
     home.hide()
-
     weekpg.show()
     print('home_cb')
 
@@ -16,23 +16,27 @@ def weekpg_cb():
     name.show()
 
 def name_cb():
+    global time
     name.hide()
+    time = time_table.TimePage(win, time_cb)
     time.show()
     name_list.append(name.get_result())
 
-    print(name_list)
+
 def time_cb():
     time.hide()
     rest.show()
     available_time.append(time.get_result())
-    print(available_time)
-    print(name_list)
+    print('available_time:',available_time)
+    print('name_list:', name_list)
     
 def rest_cb():
+    rest_list.append(rest.get_selected_values())
     rest.hide()
     name.set_name_list(name_list)
     name.show()
-    
+    print('rest_list:',rest_list)
+
 def rest_over():
     rest.hide()
 
@@ -46,7 +50,7 @@ if __name__ == '__main__':
     frame.grid(row=0, column=0)
     home = home_page.HomePage(win, home_cb)
     weekpg = week.WeekPage(win, weekpg_cb)
-    name = user_name.UserName(win, name_cb, frame)
+    name = user_name.UserName(win, name_cb)
     time = time_table.TimePage(win, time_cb)
     rest = restaurant_place_image.RestaurantPage(win, rest_cb, rest_over)
     home.show()

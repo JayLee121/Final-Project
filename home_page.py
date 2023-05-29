@@ -17,17 +17,18 @@ class HomePage():
         }
         
     def layout(self):
-        self.components['title'].grid(column=1, row=0)
-        self.components['start'].grid(column=1, row=50)
-        self.components['intro'].grid(column=1, row=10)  
+        self.components['title'].place(anchor="center", relx=0.5, rely=0.069)
+        self.components['start'].place(anchor="center", relx=0.5, rely=0.278)
+        self.components['intro'].place(anchor="center", relx=0.5, rely=0.173)
 
     def show(self):
+        self.layout()
         for _, item in self.components.items():
-            item.grid()
+            item.place()
 
     def hide(self):
         for _, item in self.components.items():
-            item.grid_remove()
+            item.place_forget()
 
 if __name__ == '__main__':
     win1 = tk.Tk()
