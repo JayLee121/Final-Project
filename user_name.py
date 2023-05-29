@@ -1,10 +1,11 @@
 import tkinter as tk
 
 class UserName():
-    def __init__(self, win, cb, frame, name_list):
+    def __init__(self, win, cb, frame):
             self.win = win
             self.cb = cb
             self.frame = frame
+            self.name_list = []
             self.components = {
                 'lb3_1': tk.Label(win, text='你的名字：', fg='black', bg='#f5ebe0', font=('Arial', 12), width=20, height=2),
                 'et3': tk.Entry(win, show=None),
@@ -16,7 +17,7 @@ class UserName():
             }
             
             self.components['listbox_frame'] = tk.Frame(win, bg='#f5ebe0')
-            self.components['listbox'] = tk.Listbox(self.components['listbox_frame'], listvariable=tk.StringVar(value= name_list), width=30, height=5, font=('Arial', 12))
+            self.components['listbox'] = tk.Listbox(self.components['listbox_frame'], listvariable=tk.StringVar(value= self.name_list), width=30, height=5, font=('Arial', 12))
             self.components['scrollbar'] = tk.Scrollbar(self.components['listbox_frame'], orient="vertical", command=self.components['listbox'].yview)
             self.components['listbox'].config(yscrollcommand=self.components['scrollbar'].set)
     
@@ -34,16 +35,23 @@ class UserName():
 
  
     def show(self):
+        self.components['et3'].delete(0, tk.END)
         self.layout()
+        self.components['listbox'].config(listvariable=tk.StringVar(value= self.name_list))
+
 
 
     def hide(self):
         for _, item in self.components.items():
             item.place_forget()
+        
             
     def get_result(self):
         name = self.components['et3'].get()
         return name
+    
+    def set_name_list(self, name_list):
+        self.name_list = name_list.copy()
 
 
 
