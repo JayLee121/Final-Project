@@ -63,4 +63,11 @@ def get_result(time_dict, site_dict, total_people):
     else:
         result_list = []
     if debug: print('result_list:', result_list)
+    for i in range(len(optimal_time)):
+        result_list.append([]) 
+        for j in range(len(accept_site)):
+            if accept_site[j][1] == accept_site[0][1]: # 票數與第一個餐廳的票數相同
+                result_list[i].append(accept_site[j][0])
+        for k in range(len(time_dict[optimal_time])):
+            result_list[i].append(time_dict[optimal_time][k][0])
 
