@@ -15,15 +15,18 @@ class ResultPage():
                               justify='center'),
             'result_num': tk.Label(win, text=f'''總共有 {len(result_list)} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 16), width=30, height=2),
             'more_result': tk.Button(win, text='查看更多結果', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20, height=2,
-                               activebackground='black', activeforeground='yellow', command=self.cb),
+                               activebackground='black', activeforeground='yellow', command=self.show_more),
             'back_to_homepage': tk.Button(win, text='回首頁', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20, height=2,
                                activebackground='black', activeforeground='yellow', command=self.cb)}
 
     def layout(self):
         self.components['title'].place(anchor="center", relx=0.5, rely=0.069)
         self.components['result_num'].place(anchor="center", relx=0.5, rely=0.15)
-        self.components['more_result'].place(anchor="center", relx=0.6, rely=0.8)
-        self.components['back_to_homepage'].place(anchor="center", relx=0.4, rely=0.8)
+        if result_list == [] or result_list[-2] == []:
+            self.components['back_to_homepage'].place(anchor="center", relx=0.5, rely=0.8)
+        else:
+            self.components['back_to_homepage'].place(anchor="center", relx=0.4, rely=0.8)
+            self.components['more_result'].place(anchor="center", relx=0.6, rely=0.8)
 
 
     def create_result(self):
@@ -44,9 +47,7 @@ class ResultPage():
                 else:
                     result_lb = tk.Label(self.win, 
                                             text=f'''第 {i+1} 組最佳結果\n\n最佳時段：{result_list[i][0]}\n最佳餐廳：{result_list[i][1]}\n可參加者：{result_list[i][2]}''', 
-                                            bg='#f8ecc9', font=('Arial',16), width=30, height=6, 
-                                            #command=lambda value=checkbox_value: self.checkbox_clicked(value)
-                                            )
+                                            bg='#f8ecc9', font=('Arial',16), width=30, height=6)
                     
                     if (i+1) % 4 == 1:
                         result_lb.place(relx=0.25, rely=0.285+0.2*0)
@@ -78,6 +79,13 @@ class ResultPage():
         for _, item in self.components.items():
             item.place_forget()
 
+    def show_more(self):
+        print('more_result button clicked')
+        self.hide()
+        self.show()
+
+
+
 if __name__ == '__main__':
     win1 = tk.Tk()
     win1.geometry('1280x720')
@@ -94,10 +102,14 @@ if __name__ == '__main__':
                     ['time3', 'rest3', 'name3'], 
                     ['time4', 'rest4', 'name4'], 
                     ['time5', 'rest5', 'name5'], 
-                    ['time6', 'rest6', 'name6']]
+                    ['time6', 'rest6', 'name6'], 
+                    ['time7', 'rest7', 'name7'], 
+                    ['time8', 'rest8', 'name8'], 
+                    ['time9', 'rest9', 'name9']]
     #result_list = [['18:00-20:00', '麥當勞公館店', 'Amber, Rowan, Jay'], ['11:00-15:00', '辛殿', 'Rowan, Jay, Celest'], ['17:00-21:00', '順園小館', 'Celest, Rowan'],['15:00-18:00', '貳樓', 'Amber, Celest']]
-    #result_list = []
+    result_list = []
     print(result_list)
+
 
 
     def cb():
