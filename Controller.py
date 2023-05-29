@@ -47,6 +47,7 @@ def rest_over():
 
 def resultpg_cb():
     resultpg.hide()
+    name.clear_name_list(name_list)
     home.show()
 
 

@@ -51,6 +51,9 @@ class UserName():
     
     def set_name_list(self, name_list):
         self.name_list = name_list.copy()
+    
+    def clear_name_list(self, name_list):
+        self.name_list = []
 
 
 
