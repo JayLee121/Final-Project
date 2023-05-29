@@ -63,8 +63,6 @@ def merged(result_list, time_data_dict):
     return result_list
 
 
-
-
 def get_result(time_dict, site_dict, total_people, bus_hour_dict, time_data_dict):
     accept_time = filter_proportion(time_dict, time_proportion, total_people)  # 可接受的時間
     if len(accept_time) == 0: return []
@@ -96,6 +94,7 @@ def get_result(time_dict, site_dict, total_people, bus_hour_dict, time_data_dict
         result_list.append([optimal_time])
         
         # 餐廳
+        key = [k for k, v in time_data_dict.items() if v == result_list[0][0]][0]
         result_list[0].append(accept_site[0][0])
         for i in range(1, len(accept_site)):
             if accept_site[i][1] == accept_site[0][1]:
@@ -128,8 +127,7 @@ def get_result(time_dict, site_dict, total_people, bus_hour_dict, time_data_dict
                 result_list[i][2] += ', '
                 result_list[i][2] += time_dict[optimal_time[0]][j]
         result_list = merged(result_list, time_data_dict)
-
-    if debug: print('result_list:', result_list)
+    return result_list
 
 
 
@@ -151,8 +149,8 @@ time_data_dict = {1: '00:00-00:30', 2: '00:30-01:00', 3: '01:00-01:30', 4: '01:3
 # 之後這四個資料由前端傳入
 day = '星期二'
 name_p = ['Amber', 'Steve', 'Jay']
-time_p = [[25, 26, 27], [25, 26, 27], [25, 26, 27]]
-site_p = [['麥當勞', '順園小館'], ['麥當勞', '順園小館'] , ['麥當勞', '順園小館']]
+time_p = [[1, 25], [1, 25], [1]]
+site_p = [['麥當勞', '順園小館'], ['麥當勞', '順園小館'] , ['麥當勞']]
 
 debug = True
 time_proportion = 1/2
@@ -178,4 +176,7 @@ else: bus_hour_dict['貳樓'] = createList(21, 43)
 total_people = len(name_p)
 time_dict = get_time_dict(time_p, name_p)
 site_dict = get_site_dict(site_p, name_p)
-get_result(time_dict, site_dict, total_people, bus_hour_dict, time_data_dict)
+result_list =  get_result(time_dict, site_dict, total_people, bus_hour_dict, time_data_dict)
+if debug: print('result_list:', result_list)
+
+
