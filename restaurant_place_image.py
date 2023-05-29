@@ -124,7 +124,13 @@ if __name__ == '__main__':
     win1.title('一起聚餐吧')
     win1.configure(bg='#f2d5a3')
 
-    page = RestaurantPage(win1,lambda:page.hide())
+    def cb():
+        page.hide()
+        page.get_selected_values()
+    def rest_over():
+        page.hide()
+
+    page = RestaurantPage(win1, cb, rest_over)
     page.show()
 
     win1.mainloop()
