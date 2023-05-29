@@ -1,10 +1,9 @@
 import tkinter as tk
 
 class UserName():
-    def __init__(self, win, cb, frame):
+    def __init__(self, win, cb):
             self.win = win
             self.cb = cb
-            self.frame = frame
             self.name_list = []
             self.components = {
                 'lb3_1': tk.Label(win, text='你的名字：', fg='black', bg='#f5ebe0', font=('Arial', 12), width=20, height=2),
@@ -27,7 +26,7 @@ class UserName():
         self.components['et3'].place(anchor="center", relx=0.56, rely=0.380)
         self.components['lbtitle'].place(anchor="center", relx=0.5, rely=0.278)
         self.components['lb3_4'].place(anchor="center", relx=0.5, rely=0.44)
-        self.components['listbox_frame'].place(anchor="center", relx=0.5, rely=0.5)
+        self.components['listbox_frame'].place(anchor="center", relx=0.5, rely=0.5) 
         self.components['bt3'].place(anchor = "center", relx= 0.5, rely = 0.65)
         self.components['listbox'].pack(side="left", fill="y")
         self.components['scrollbar'].pack(side="right", fill="y")
@@ -61,14 +60,12 @@ if __name__ == '__main__':
     win1.geometry('1280x720')
     win1.title('一起聚餐吧')
     win1.configure(bg='#f2d5a3')
-    frame = tk.Frame(win1, width=15)
-    frame.grid(row=0, column=0)
-
+    
     def call_back(): 
         name_list.append(page.get_result())
         page.hide()
    
-    page = UserName(win1, call_back ,frame, name_list)
+    page = UserName(win1, call_back)
     page.show()
 
     win1.mainloop()
