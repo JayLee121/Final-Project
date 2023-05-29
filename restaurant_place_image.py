@@ -51,7 +51,7 @@ class RestaurantPage:
         #image_paths = ["餐廳首圖_麥當勞(780x585).jpeg", "餐廳首圖_順園(4000 x 2925).webp", "餐廳首圖_辛殿(2280 x912).webp", "餐廳首圖_鍋in(600x600).jpeg", "餐廳首圖_貳樓(1920x1280).jpeg"]
         image_paths = ["餐廳首圖_麥當勞.jpg", "餐廳首圖_順園.jpg", "餐廳首圖_辛殿.jpg", "餐廳首圖_鍋in.jpg", "餐廳首圖_貳樓.jpg"]
         for path in image_paths:
-            image = Image.open('/Users/jay/Documents/GitHub/Final-Project/' + path)
+            image = Image.open(path)
             image = self.resize_and_crop_image(image)
             self.images.append(ImageTk.PhotoImage(image))
 
