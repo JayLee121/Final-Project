@@ -1,10 +1,11 @@
 # Controller
-import home_page, user_name, time_table, restaurant_place_image, week
+import home_page, user_name, time_table, restaurant_place_image, week, result
 import tkinter as tk
 
 name_list = []
 available_time = []
 rest_list = []
+rs_list = []
 
 def home_cb():
     home.hide()
@@ -24,13 +25,16 @@ def name_cb():
 
 
 def time_cb():
+    global rest
     time.hide()
+    rest = restaurant_place_image.RestaurantPage(win, rest_cb, rest_over)
     rest.show()
     available_time.append(time.get_result())
     print('available_time:',available_time)
     print('name_list:', name_list)
     
 def rest_cb():
+    
     rest_list.append(rest.get_selected_values())
     rest.hide()
     name.set_name_list(name_list)
@@ -39,6 +43,13 @@ def rest_cb():
 
 def rest_over():
     rest.hide()
+    resultpg.show()
+
+def resultpg_cb():
+    resultpg.hide()
+    home.show()
+
+
 
 
 if __name__ == '__main__':
@@ -48,10 +59,11 @@ if __name__ == '__main__':
     win.configure(bg='#f2d5a3')
     frame = tk.Frame(win, width=15)
     frame.grid(row=0, column=0)
+
     home = home_page.HomePage(win, home_cb)
     weekpg = week.WeekPage(win, weekpg_cb)
     name = user_name.UserName(win, name_cb)
-    time = time_table.TimePage(win, time_cb)
-    rest = restaurant_place_image.RestaurantPage(win, rest_cb, rest_over)
+    resultpg = result.ResultPage(win, resultpg_cb, rs_list)
+
     home.show()
     win.mainloop()
