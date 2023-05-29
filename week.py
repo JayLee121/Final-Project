@@ -53,6 +53,6 @@ if __name__ == '__main__':
         page.hide()
         print('Selected value:', result)
 
-    page = TimePage(win, cb)
+    page = WeekPage(win, cb)
     page.show()
     win.mainloop()

@@ -44,7 +44,6 @@ if __name__ == '__main__':
     win.configure(bg='#f2d5a3')
     frame = tk.Frame(win, width=15)
     frame.grid(row=0, column=0)
-    # 還在想 name_list 要怎麼不傳入name_list 但仍可work    
     home = home_page.HomePage(win, home_cb)
     weekpg = week.WeekPage(win, weekpg_cb)
     name = user_name.UserName(win, name_cb, frame)
