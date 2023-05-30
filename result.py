@@ -23,7 +23,7 @@ class ResultPage():
         self.components['title'].place(anchor="center", relx=0.5, rely=0.069)
         self.components['result_num'].place(anchor="center", relx=0.5, rely=0.15)
         
-        if len(self.rs_list) < 4 or (len(self.rs_list) > 5 and self.rs_list[-4]== []) :
+        if len(self.rs_list) < 4 or (len(self.rs_list) > 5 and self.rs_list[-1]== []) :
             self.components['back_to_homepage'].place(anchor="center", relx=0.5, rely=0.8)
         else:
             self.components['back_to_homepage'].place(anchor="center", relx=0.4, rely=0.8)
@@ -41,13 +41,13 @@ class ResultPage():
 
         # 約成
         else:
-            for i in range(len(self.rs_list)):
+            for i in range(len(self.rs_list )):
                 if self.rs_list [i] == []:
                     continue
 
                 else:
                     result_lb = tk.Label(self.win, 
-                                            text=f'''第 {i+1} 組最佳結果\n\n最佳時段：{self.rs_list[i][0]}\n最佳餐廳：{self.rs_list [i][1]}\n可參加者：{self.rs_list [i][2]}''', 
+                                            text=f'''第 {i+1} 組最佳結果\n\n最佳時段：{self.rs_list [i][0]}\n最佳餐廳：{self.rs_list [i][1]}\n可參加者：{self.rs_list [i][2]}''', 
                                             bg='#f8ecc9', font=('Arial',16), width=30, height=6)
                     
                     if (i+1) % 4 == 1:
@@ -95,6 +95,7 @@ if __name__ == '__main__':
     win1.configure(bg='#f2d5a3')
 
     # 測資
+    
     rs_list  = [['time1', 'rest1', 'name1'], 
                     ['time2', 'rest2', 'name2'], 
                     ['time3', 'rest3', 'name3']]
@@ -110,7 +111,7 @@ if __name__ == '__main__':
                     ['time9', 'rest9', 'name9']]
     '''
     #self.rs_list  = [['18:00-20:00', '麥當勞公館店', 'Amber, Rowan, Jay'], ['11:00-15:00', '辛殿', 'Rowan, Jay, Celest'], ['17:00-21:00', '順園小館', 'Celest, Rowan'],['15:00-18:00', '貳樓', 'Amber, Celest']]
-    print(rs_list)
+    # print(rs_list)
 
     # rs_list = []
 
