@@ -23,7 +23,7 @@ class ResultPage():
         self.components['title'].place(anchor="center", relx=0.5, rely=0.069)
         self.components['result_num'].place(anchor="center", relx=0.5, rely=0.15)
         
-        if len(self.rs_list) < 4 or (len(self.rs_list) > 5 and self.rs_list[-1]== []) :
+        if len(self.rs_list) <= 4 or (len(self.rs_list) > 5 and self.rs_list[-1]== []) :
             self.components['back_to_homepage'].place(anchor="center", relx=0.5, rely=0.8)
         else:
             self.components['back_to_homepage'].place(anchor="center", relx=0.4, rely=0.8)
