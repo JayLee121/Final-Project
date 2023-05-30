@@ -47,8 +47,9 @@ if __name__ == '__main__':
     win1.geometry('1280x720')
     win1.title('一起聚餐吧')
     win1.configure(bg='#f2d5a3')
+    
 
-    p1 = HomePage(win1)
+    p1 = HomePage(win1, lambda:p1.hide())
     p1.show()
 
     win1.mainloop()

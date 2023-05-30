@@ -13,11 +13,12 @@ class ResultPage():
         self.components = {
             'title': tk.Label(win, text='\n 最終結果！\n', fg='black', bg='#f2d5a3', font=('Arial', 22), width=30, height=3,
                               justify='center'),
-            'result_num': tk.Label(win, text=f'''總共有 {len(self.rs_list)} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 16), width=30, height=2),
+            'result_num': tk.Label(win, text=f'''總共有 {len(rs_list)} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 16), width=30, height=2),
             'more_result': tk.Button(win, text='查看更多結果', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20, height=2,
                                activebackground='black', activeforeground='yellow', command=self.show_more),
             'back_to_homepage': tk.Button(win, text='回首頁', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20, height=2,
                                activebackground='black', activeforeground='yellow', command=self.cb)}
+        
 
     def layout(self):
         self.components['title'].place(anchor="center", relx=0.5, rely=0.069)
@@ -72,7 +73,6 @@ class ResultPage():
         self.layout()
         for _, item in self.components.items():
             item.place()
-        
 
     def hide(self):
         for lbs in self.result_lbs:
@@ -82,7 +82,7 @@ class ResultPage():
             item.place_forget()
 
     def show_more(self):
-        print('more_result button clicked')
+        self.win.update()
         self.hide()
         self.show()
 
@@ -96,10 +96,10 @@ if __name__ == '__main__':
 
     # 測資
     
-    rs_list  = [['time1', 'rest1', 'name1'], 
-                    ['time2', 'rest2', 'name2'], 
-                    ['time3', 'rest3', 'name3']]
-    '''
+    # rs_list  = [['time1', 'rest1', 'name1'], 
+    #                 ['time2', 'rest2', 'name2'], 
+    #                 ['time3', 'rest3', 'name3']]
+    
     rs_list  = [['time1', 'rest1', 'name1'], 
                     ['time2', 'rest2', 'name2'], 
                     ['time3', 'rest3', 'name3'], 
@@ -109,7 +109,7 @@ if __name__ == '__main__':
                     ['time7', 'rest7', 'name7'], 
                     ['time8', 'rest8', 'name8'], 
                     ['time9', 'rest9', 'name9']]
-    '''
+
     #self.rs_list  = [['18:00-20:00', '麥當勞公館店', 'Amber, Rowan, Jay'], ['11:00-15:00', '辛殿', 'Rowan, Jay, Celest'], ['17:00-21:00', '順園小館', 'Celest, Rowan'],['15:00-18:00', '貳樓', 'Amber, Celest']]
     # print(rs_list)
 

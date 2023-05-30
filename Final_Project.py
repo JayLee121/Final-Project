@@ -1,3 +1,16 @@
+restaurant_data_dict = {
+    1: '麥當勞公館店',
+    2: '順園小館',
+    3: '辛殿',
+    4: '鍋in',
+    5: '貳樓'
+}
+
+
+
+
+
+
 def get_time_dict(time_p, name_p):
     '''產出key是時間字串 value是list裡面是人名的dict'''
     time_dict = {}
@@ -32,6 +45,7 @@ def filter_proportion(x_dict, proportion, total_people):
     for key in x_dict.keys():
         num = len(x_dict[key])
         if num >= total_people * proportion: temp_x.append([key, num])
+    print('tempx:',temp_x)
     return temp_x
 
 
@@ -40,8 +54,10 @@ def find_optimal(temp_x):
     accept_x = (sorted(temp_x, key=lambda x:x[1], reverse=True))
     optimal_x = []
     optimal_x.append(accept_x[0][0])
+    best_num_vote = accept_x[0][1]
     for i in range (1, len(accept_x)):
         if accept_x[i][1] == accept_x[0][1]: optimal_x.append(accept_x[i][0])
+    print('best_num_vote', best_num_vote)
     return optimal_x
 
 
@@ -80,13 +96,13 @@ def get_result_time(time_dict, total_people):
             result_list[i].append(optimal_time[i])
     return result_list, optimal_time
     
-    
+best_num_vote = 0
 def get_result_site(result_list, optimal_time, time_dict, site_dict, total_people, bus_hour_dict, time_data_dict):
     if result_list == [['沒有能聚的時間']]: return [['沒有能聚的時間', '']]
     site_vote = {}
-    for time in optimal_time:
-        name_list = time_dict[time]
-        for name in name_list:
+    
+    name_list = time_dict[optimal_time[0]]
+    for name in name_list:
             site_list = site_dict[name]
             for site in site_list:
                 if site not in site_vote:
@@ -94,26 +110,29 @@ def get_result_site(result_list, optimal_time, time_dict, site_dict, total_peopl
                 else:
                     site_vote[site].append(name)
     if debug: print('site_vote:', site_vote)
-    accept_site = filter_proportion(site_vote, site_proportion, total_people)  # 可接受的餐廳
+    accept_site = filter_proportion(site_vote, site_proportion, best_num_vote)  # 可接受的餐廳
     if debug: print('accept_site:', accept_site)
-    
+
     # 只有一個最佳時間
     if len(optimal_time) == 1:
         key = [k for k, v in time_data_dict.items() if v == optimal_time[0]][0]
         while True:
             try:
-                if key in bus_hour_dict[accept_site[0][0]]:
+                restaurant_name = restaurant_data_dict[(accept_site[0][0])]
+                if key in bus_hour_dict[restaurant_name]:
                     break
                 else:
                     accept_site.pop(0)
             except IndexError:
                 result_list[0].append('想要的餐廳剛好都沒有在此時段營業，請考慮其他餐廳～')
                 return result_list
-        result_list[0].append(accept_site[0][0])
+        restaurant_name = restaurant_data_dict[accept_site[0][0]]
+        result_list[0].append( restaurant_name)
         for i in range(1, len(accept_site)):
             if accept_site[i][1] == accept_site[0][1]:
                 result_list[0][1] += ', '
-                result_list[0][1] += accept_site[i][0]
+                restaurant_name = restaurant_data_dict[accept_site[i][0]]
+                result_list[0][1] += restaurant_name
         return result_list
 
     # 有多個最佳時間 
@@ -121,13 +140,16 @@ def get_result_site(result_list, optimal_time, time_dict, site_dict, total_peopl
         for i in range(len(optimal_time)):
             key = [k for k, v in time_data_dict.items() if v == optimal_time[i]][0]
             for j in range(len(accept_site)):
-                if key in bus_hour_dict[accept_site[j][0]]:
+                restaurant_name = restaurant_data_dict[(accept_site[j][0])]
+                if key in bus_hour_dict[restaurant_name]:
                     if accept_site[j][1] == accept_site[0][1]:
-                        result_list[i].append(accept_site[j][0])
+                        restaurant_name = restaurant_data_dict[accept_site[j][0]]
+                        result_list[i].append(restaurant_name)
                     for k in range(j+1, len(accept_site)):
                         if accept_site[k][1] == accept_site[0][1]:  # 票數與第一個餐廳的票數相同
                             result_list[i][1] += ', '
-                            result_list[i][1] += accept_site[k][0]
+                            restaurant_name = restaurant_data_dict[accept_site[k][0]]
+                            result_list[i][1] += restaurant_name
         
         
         for i in range(len(result_list)):
@@ -177,14 +199,22 @@ time_data_dict = {1: '00:00-00:30', 2: '00:30-01:00', 3: '01:00-01:30', 4: '01:3
             45: '22:00-22:30', 46: '22:30-23:00', 47: '23:00-23:30', 48: '23:30-24:00'}
 # try these
 # 之後這四個資料由前端傳入
-day = '星期二'
-name_p = ['Amber', 'Steve', 'Jay']
-time_p = [[25, 26], [26, 25, 27], [26, 25, 27]]
-site_p = [['麥當勞公館店'], ['麥當勞公館店', '順園小館'] , ['辛殿']]
+day = 2
+# name_p = ['Amber', 'Steve', 'Jay']
+# name_p = ['123', '45678']
+# time_p = [[25, 26], [26, 25, 27], [26, 25, 27]]
+# time_p = [[14, 15, 21, 27, 28, 34, 40], [39, 34, 35, 23, 27]]
+# site_p = [['麥當勞公館店'], ['麥當勞公館店', '順園小館'] , ['辛殿']]
+
+time_p =[[44, 45], [45, 39, 38, 32]]
+name_p =['jay', 'jsutin']
+site_p=[[4, 5], [5, 4]]
+
+
 
 debug = True
-time_proportion = 1/2
-site_proportion = 1/3
+time_proportion = 1/10
+site_proportion = 1/10
 
 for i in range(len(time_p)):
     for j in range(len(time_p[i])):
@@ -193,14 +223,14 @@ for i in range(len(time_p)):
 # 這一段會產生一個dict key是餐廳 values是list 裡面裝開放的時間(用數字表示)
 bus_hour_dict = {}  # business_hour
 bus_hour_dict['麥當勞公館店'] = createList(15, 45)
-if '四' in day:
+if 4==  day:
     bus_hour_dict['順園小館'] = createList(23, 28)
     for time in createList(35, 42):
         bus_hour_dict['順園小館'].append(time)
 else: bus_hour_dict['順園小館'] = []
 bus_hour_dict['辛殿'] = createList(24, 28)
 bus_hour_dict['鍋in'] = createList(23, 48)
-if '六' in day or '日' in day: bus_hour_dict['貳樓'] = createList(19, 43)
+if day==6 in day ==7 : bus_hour_dict['貳樓'] = createList(19, 43)
 else: bus_hour_dict['貳樓'] = createList(21, 43)
 
 total_people = len(name_p)
@@ -211,4 +241,8 @@ result_list = get_result_site(result_list, optimal_time, time_dict, site_dict, t
 result_list = get_result_name(result_list, optimal_time, time_dict, site_dict, total_people, bus_hour_dict, time_data_dict)
 result_list = merged(result_list, time_data_dict)
 if debug: print('result_list:', result_list)
+
+
+
+
 
