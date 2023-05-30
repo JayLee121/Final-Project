@@ -49,13 +49,14 @@ def merged(result_list, time_data_dict):
     i = 0
     while True:
         try:
-            result_list[i][0][-5:] == result_list[i+1][0][0:5]
-            if result_list[i][0] and\
+            if result_list[i][0][-5:] == result_list[i+1][0][0:5] and\
             result_list[i][1] == result_list[i+1][1] and\
             result_list[i][2] == result_list[i+1][2]:
                 result_list[i][0] = result_list[i][0][0:5]
                 result_list[i][0] += '-'
                 result_list[i][0] += result_list[i+1][0][-5:]
+            else:
+                break
             result_list.pop(i+1)
         except IndexError:
             break
@@ -121,16 +122,17 @@ def get_result_site(result_list, optimal_time, time_dict, site_dict, total_peopl
             key = [k for k, v in time_data_dict.items() if v == optimal_time[i]][0]
             for j in range(len(accept_site)):
                 if key in bus_hour_dict[accept_site[j][0]]:
-                    result_list[i].append(accept_site[j][0])
+                    if accept_site[j][1] == accept_site[0][1]:
+                        result_list[i].append(accept_site[j][0])
                     for k in range(j+1, len(accept_site)):
                         if accept_site[k][1] == accept_site[0][1]:  # 票數與第一個餐廳的票數相同
                             result_list[i][1] += ', '
                             result_list[i][1] += accept_site[k][0]
         
         
-        for data in result_list:
-            if len(data) == 1:
-                data.append('想要的餐廳剛好都沒有在此時段營業，請考慮其他餐廳～')
+        for i in range(len(result_list)):
+            if len(result_list[i]) == 1:
+                result_list[i].append('想要的餐廳剛好都沒有在此時段營業，請考慮其他餐廳～')
         return result_list
     
     
@@ -139,13 +141,13 @@ def get_result_name(result_list, optimal_time, time_dict, site_dict, total_peopl
     
     # 只有一個最佳時間
     if len(optimal_time) == 1:
-        if result_list[i][1] == '想要的餐廳剛好都沒有在此時段營業，請考慮其他餐廳～':
-            result_list[i].append('')
+        if result_list[0][1] == '想要的餐廳剛好都沒有在此時段營業，請考慮其他餐廳～':
+            result_list[0].append('')
         else:
-            result_list[0].append(time_dict[optimal_time][0])
-            for i in range(1, len(time_dict[optimal_time])):
+            result_list[0].append(time_dict[optimal_time[0]][0])
+            for i in range(1, len(time_dict[optimal_time[0]])):
                 result_list[0][2] += ', '
-                result_list[0][2] += time_dict[optimal_time][i]
+                result_list[0][2] += time_dict[optimal_time[0]][i]
         return result_list
     
     # 有多個最佳時間
@@ -177,7 +179,7 @@ time_data_dict = {1: '00:00-00:30', 2: '00:30-01:00', 3: '01:00-01:30', 4: '01:3
 # 之後這四個資料由前端傳入
 day = '星期二'
 name_p = ['Amber', 'Steve', 'Jay']
-time_p = [[1, 2], [1, 2], [1, 2]]
+time_p = [[25, 26], [26, 25, 27], [26, 25, 27]]
 site_p = [['麥當勞公館店'], ['麥當勞公館店', '順園小館'] , ['辛殿']]
 
 debug = True
