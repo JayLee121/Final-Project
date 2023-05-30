@@ -24,13 +24,13 @@ Hey! My dear friends!!!
 點擊下方 START 按鈕
 開啟你的最酷飯局！(ง •ૅ౪•᷄)ว 
 
-''', fg='black', bg='#f5ebe0', font=('Arial', 18), justify='left', width=50),}
+''', fg='black', bg='#f5ebe0', font=('Arial', 18), justify='left', width=50),
+        }
 
     def layout(self):
         self.components['title'].place(anchor="center", relx=0.5, rely=0.2)
-        self.components['start'].place(anchor="center", relx=0.5, rely=0.8)
         self.components['intro'].place(anchor="center", relx=0.5, rely=0.5)
-
+        self.components['start'].place(anchor="center", relx=0.5, rely=0.8)
 
     def show(self):
         self.layout()
@@ -40,6 +40,10 @@ Hey! My dear friends!!!
     def hide(self):
         for _, item in self.components.items():
             item.place_forget()
+
+
+
+
 
 
 if __name__ == '__main__':
