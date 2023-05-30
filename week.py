@@ -12,7 +12,7 @@ class WeekPage:
         }
 
     def layout(self):
-        self.components['bt'].place(anchor="center", x=600, y=600)
+        self.components['bt'].place(anchor="center", relx=0.5, rely=0.8)
         self.components['lb'].place(anchor="center", relx=0.5, rely=0.2)
 
     def get_result(self):
