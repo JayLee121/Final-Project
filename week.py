@@ -8,7 +8,7 @@ class WeekPage:
         self.selected_value = tk.StringVar(value=None)  # 儲存選中按鈕的值
         self.components = {
             'bt': tk.Button(win, text='Save Selected', bg='#f2d5a3', command=self.cb),
-            'lb': tk.Label(win, text='\\  請選取打算星期幾聚餐  /', font=('Arial', 30), bg='#f2d5a3'),
+            'lb': tk.Label(win, text='\\  請選取打算在星期幾聚餐  /', font=('Arial', 30), bg='#f2d5a3'),
         }
 
     def layout(self):
@@ -26,7 +26,7 @@ class WeekPage:
         for i in range(7):
             value = i + 1
             radiobutton = tk.Radiobutton(self.win,text=time_list[i],bg='#f2d5a3',font=('Arial', 16),variable=self.selected_value, value=value,)
-            radiobutton.place(relx=0.2 + 0.1 * i, rely=0.285 + 0.05 * 3)  # 相對座標
+            radiobutton.place(relx=0.245 + 0.075 * i, rely=0.285 + 0.05 * 3)  # 相對座標
             self.radiobuttons.append(radiobutton)
             self.selected_value.set(None)
     
