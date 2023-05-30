@@ -13,22 +13,22 @@ class ResultPage():
         self.components = {
             'title': tk.Label(win, text='\n 最終結果！\n', fg='black', bg='#f2d5a3', font=('Arial', 22), width=30, height=3,
                               justify='center'),
-            'result_num': tk.Label(win, text=f'''總共有 {len(rs_list)} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 16), width=30, height=2),
+            'result_num': tk.Label(win, text=f'''總共有 {len(self.rs_list)} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 16), width=30, height=2),
             'more_result': tk.Button(win, text='查看更多結果', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20, height=2,
                                activebackground='black', activeforeground='yellow', command=self.show_more),
-            'back_to_homepage': tk.Button(win, text='回首頁', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20, height=2,
+            'back_to_homepage': tk.Button(win, text='回首頁', bg='#e3d5ca', fg='black', font=('Arial', 16), width=20, height=2,
                                activebackground='black', activeforeground='yellow', command=self.cb)}
         
 
     def layout(self):
-        self.components['title'].place(anchor="center", relx=0.5, rely=0.069)
-        self.components['result_num'].place(anchor="center", relx=0.5, rely=0.15)
+        self.components['title'].place(anchor="center", relx=0.5, rely=0.2)
+        self.components['result_num'].place(anchor="center", relx=0.5, rely=0.3)
         
-        if len(self.rs_list) <= 4 or (len(self.rs_list) > 5 and self.rs_list[-1]== []) :
-            self.components['back_to_homepage'].place(anchor="center", relx=0.5, rely=0.8)
+        if len(self.rs_list) < 4 or (len(self.rs_list) > 5 and self.rs_list[-1]== []) :
+            self.components['back_to_homepage'].place(anchor="center", relx=0.5, rely=0.82)
         else:
-            self.components['back_to_homepage'].place(anchor="center", relx=0.4, rely=0.8)
-            self.components['more_result'].place(anchor="center", relx=0.6, rely=0.8)
+            self.components['back_to_homepage'].place(anchor="center", relx=0.4, rely=0.82)
+            self.components['more_result'].place(anchor="center", relx=0.6, rely=0.82)
 
 
     def create_result(self):
@@ -48,17 +48,22 @@ class ResultPage():
 
                 else:
                     result_lb = tk.Label(self.win, 
-                                            text=f'''第 {i+1} 組最佳結果\n\n最佳時段：{self.rs_list [i][0]}\n最佳餐廳：{self.rs_list [i][1]}\n可參加者：{self.rs_list [i][2]}''', 
-                                            bg='#f8ecc9', font=('Arial',16), width=30, height=6)
+                                            text=f'''
+第 {i+1} 組最佳結果
+最佳時段：{self.rs_list [i][0]}
+最佳餐廳：{self.rs_list [i][1]}
+可參加者：{self.rs_list [i][2]}
+''',
+                                            justify='left', bg='#f8ecc9', font=('Arial',16), width=30, height=6)
                     
                     if (i+1) % 4 == 1:
-                        result_lb.place(relx=0.25, rely=0.285+0.2*0)
+                        result_lb.place(relx=0.25, rely=0.38+0.2*0)
                     elif (i+1) % 4 == 2:
-                        result_lb.place(relx=0.55, rely=0.285+0.2*0)
+                        result_lb.place(relx=0.55, rely=0.38+0.2*0)
                     elif (i+1) % 4 == 3:
-                        result_lb.place(relx=0.25, rely=0.285+0.2*1) 
+                        result_lb.place(relx=0.25, rely=0.38+0.2*1) 
                     else:
-                        result_lb.place(relx=0.55, rely=0.285+0.2*1)
+                        result_lb.place(relx=0.55, rely=0.38+0.2*1)
                     
                     self.result_lbs.append(result_lb)
                     self.rs_list [i] = []  # 把已顯示過的結果轉為空的list

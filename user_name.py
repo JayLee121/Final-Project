@@ -6,28 +6,27 @@ class UserName():
             self.cb = cb
             self.name_list = []
             self.components = {
-                'lb3_1': tk.Label(win, text='你的名字：', fg='black', bg='#f5ebe0', font=('Arial', 12), width=20, height=2),
-                'et3': tk.Entry(win, show=None),
-                'lbtitle': tk.Label(win, text='\n一起聚餐吧\n', fg='black', bg='#f2d5a3', font=('Arial', 22, "bold"), width=30,
-                                    height=3, justify='center'),
-                'lb3_4': tk.Label(win, text='已填好的人', fg='black', bg='#f2d5a3', font=('Arial',12, "bold"), width=30, height=2),
-                'bt3': tk.Button(win, text='我填好了，換下一位！', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20,
+                #'lb3_1': tk.Label(win, text='名字', fg='black', bg='#f5ebe0', font=('Arial', 16), width=20, height=2),
+                'et3': tk.Entry(win, show=None, width=20),
+                'lbtitle': tk.Label(win, text='\\  輸入你的名字  /', fg='black', bg='#f2d5a3', font=('Arial', 30, "bold"), width=30, height=3, justify='center'),
+                'lb3_4': tk.Label(win, text='已填好的人 (^o^)／', fg='black', bg='#f2d5a3', font=('Arial',16), width=30, height=2),
+                'bt3': tk.Button(win, text='下一頁', bg='#e3d5ca', fg='black', font=('Arial', 16), width=20,
                                 height=2, activebackground='black', activeforeground='yellow', command=self.cb),
             }
             
             self.components['listbox_frame'] = tk.Frame(win, bg='#f5ebe0')
-            self.components['listbox'] = tk.Listbox(self.components['listbox_frame'], listvariable=tk.StringVar(value= self.name_list), width=30, height=5, font=('Arial', 12))
+            self.components['listbox'] = tk.Listbox(self.components['listbox_frame'], listvariable=tk.StringVar(value= self.name_list), width=30, height=7, font=('Arial', 16), bg='#f5ebe0')
             self.components['scrollbar'] = tk.Scrollbar(self.components['listbox_frame'], orient="vertical", command=self.components['listbox'].yview)
             self.components['listbox'].config(yscrollcommand=self.components['scrollbar'].set)
     
     
     def layout(self):
-        self.components['lb3_1'].place(anchor="center", relx=0.42, rely=0.380)
-        self.components['et3'].place(anchor="center", relx=0.56, rely=0.380)
-        self.components['lbtitle'].place(anchor="center", relx=0.5, rely=0.278)
-        self.components['lb3_4'].place(anchor="center", relx=0.5, rely=0.44)
-        self.components['listbox_frame'].place(anchor="center", relx=0.5, rely=0.5) 
-        self.components['bt3'].place(anchor = "center", relx= 0.5, rely = 0.65)
+        #self.components['lb3_1'].place(anchor="center", relx=0.42, rely=0.380)
+        self.components['et3'].place(anchor="center", relx=0.5, rely=0.3)
+        self.components['lbtitle'].place(anchor="center", relx=0.5, rely=0.2)
+        self.components['lb3_4'].place(anchor="center", relx=0.5, rely=0.425)
+        self.components['listbox_frame'].place(anchor="center", relx=0.5, rely=0.55) 
+        self.components['bt3'].place(anchor = "center", relx= 0.5, rely = 0.8)
         self.components['listbox'].pack(side="left", fill="y")
         self.components['scrollbar'].pack(side="right", fill="y")
     
