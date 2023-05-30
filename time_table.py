@@ -6,17 +6,13 @@ class TimePage:
         self.cb = cb
         self.checkboxes = []  # 儲存複選框的列表
         self.selected_boxes = []  # 儲存選中複選框的值的列表
-        self.time_frame=tk.Frame(win, bg='#f2d5a3')
-        self.components = {'bt': tk.Button(self.time_frame, text='Save Selected', bg='#f2d5a3', command=self.cb),
-                           'lb':tk.Label(self.time_frame, text='\\  請點選你有空的時間  /', font=('Arail', 30), bg='#f2d5a3'),
-                            }
+        self.components = {'lb':tk.Label(win, text='\\  請點選你有空的時間  /', font=('Arail', 30, 'bold'), bg='#f2d5a3'),
+                            'bt': tk.Button(win, text='下一頁', bg='#e3d5ca', fg='black', font=('Arial', 16), width=20,
+                                height=2, activebackground='black', activeforeground='yellow', command=self.cb),                            }
 
-    # 好像可以不用這段
     def layout(self):
-        self.create_checkboxes()
-        self.components['bt'].place(anchor="center", x=600, y=600)
         self.components['lb'].place(anchor="center", relx=0.5, rely=0.2)
-        self.time_frame.place(relx=0, relheight=1, relwidth=1)
+        self.components['bt'].place(anchor="center", relx=0.5, rely=0.8)
 
     def checkbox_clicked(self, checkbox_value):
         # 複選框點擊事件處理函數
@@ -48,21 +44,24 @@ class TimePage:
         for i in range(8):
             for j in range(6):
                 checkbox_value = i * 6 + j + 1
-                checkbox = tk.Checkbutton(self.time_frame, text=time_list[checkbox_value-1], bg='#f2d5a3', font=('Arial',16), command=lambda value=checkbox_value: self.checkbox_clicked(value))
+                checkbox = tk.Checkbutton(self.win, text=time_list[checkbox_value-1], bg='#f2d5a3', font=('Arial',16), command=lambda value=checkbox_value: self.checkbox_clicked(value))
                 
-                checkbox.place(relx=0.2+0.1*j, rely=0.285+0.05*i)  # 相對座標
+                checkbox.place(relx=0.2+0.1*j, rely=0.31+0.05*i)  # 相對座標
 
                 self.checkboxes.append(checkbox)
 
 
     def show(self):
-        self.time_frame.config(bg='#f2d5a3')
         self.layout()
+        self.create_checkboxes()
 
 
     def hide(self):
-        self.time_frame.config(bg='#f2d5a3')
-        self.time_frame.place_forget()
+        for box in self.checkboxes:
+            box.place_forget()
+        
+        for _, item in self.components.items():
+            item.place_forget()
   
 
 
@@ -73,7 +72,6 @@ if __name__ == '__main__':
     win.configure(bg='#f2d5a3')
     def save_selected():
         selected_values = page.get_result()
-        page = TimePage(win, lambda:page.hide())
         print('Selected values:', selected_values)
 
     page = TimePage(win, lambda:page.hide())
