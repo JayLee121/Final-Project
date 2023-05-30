@@ -13,9 +13,9 @@ class TimePage:
 
     # 好像可以不用這段
     def layout(self):
+        self.create_checkboxes()
         self.components['bt'].place(anchor="center", x=600, y=600)
         self.components['lb'].place(anchor="center", relx=0.5, rely=0.2)
-        self.create_checkboxes()
         self.time_frame.place(relx=0, relheight=1, relwidth=1)
 
     def checkbox_clicked(self, checkbox_value):
@@ -61,6 +61,7 @@ class TimePage:
 
 
     def hide(self):
+        self.time_frame.config(bg='#f2d5a3')
         self.time_frame.place_forget()
   
 

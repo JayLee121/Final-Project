@@ -1,5 +1,6 @@
 # Controller
 import home_page, user_name, time_table, restaurant_place_image, week, result
+import Algorithm
 import tkinter as tk
 
 name_list = []
@@ -43,6 +44,8 @@ def rest_cb():
 
 def rest_over():
     rest.hide()
+    
+    Algorithm.get_result()
     resultpg.show()
 
 def resultpg_cb():
