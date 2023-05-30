@@ -9,12 +9,11 @@ class ResultPage():
         self.win = win
         self.cb = cb
         self.rs_list = rs_list
-
         self.result_lbs = []
         self.components = {
             'title': tk.Label(win, text='\n 最終結果！\n', fg='black', bg='#f2d5a3', font=('Arial', 22), width=30, height=3,
                               justify='center'),
-            'result_num': tk.Label(win, text=f'''總共有 {len(self.rs_list )} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 16), width=30, height=2),
+            'result_num': tk.Label(win, text=f'''總共有 {len(self.rs_list)} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 16), width=30, height=2),
             'more_result': tk.Button(win, text='查看更多結果', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20, height=2,
                                activebackground='black', activeforeground='yellow', command=self.show_more),
             'back_to_homepage': tk.Button(win, text='回首頁', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20, height=2,
@@ -23,7 +22,8 @@ class ResultPage():
     def layout(self):
         self.components['title'].place(anchor="center", relx=0.5, rely=0.069)
         self.components['result_num'].place(anchor="center", relx=0.5, rely=0.15)
-        if self.rs_list  == [] or self.rs_list [-2] == []:
+        
+        if len(self.rs_list) < 4 or (len(self.rs_list) > 5 and self.rs_list[-4]== []) :
             self.components['back_to_homepage'].place(anchor="center", relx=0.5, rely=0.8)
         else:
             self.components['back_to_homepage'].place(anchor="center", relx=0.4, rely=0.8)
@@ -41,13 +41,13 @@ class ResultPage():
 
         # 約成
         else:
-            for i in range(len(self.rs_list )):
+            for i in range(len(self.rs_list)):
                 if self.rs_list [i] == []:
                     continue
 
                 else:
                     result_lb = tk.Label(self.win, 
-                                            text=f'''第 {i+1} 組最佳結果\n\n最佳時段：{self.rs_list [i][0]}\n最佳餐廳：{self.rs_list [i][1]}\n可參加者：{self.rs_list [i][2]}''', 
+                                            text=f'''第 {i+1} 組最佳結果\n\n最佳時段：{self.rs_list[i][0]}\n最佳餐廳：{self.rs_list [i][1]}\n可參加者：{self.rs_list [i][2]}''', 
                                             bg='#f8ecc9', font=('Arial',16), width=30, height=6)
                     
                     if (i+1) % 4 == 1:
@@ -68,10 +68,11 @@ class ResultPage():
         return self.rs_list 
 
     def show(self):
+        self.create_result()
         self.layout()
         for _, item in self.components.items():
             item.place()
-        self.create_result()
+        
 
     def hide(self):
         for lbs in self.result_lbs:
@@ -94,10 +95,10 @@ if __name__ == '__main__':
     win1.configure(bg='#f2d5a3')
 
     # 測資
-    '''self.rs_list  = [['time1', 'rest1', 'name1'], 
+    rs_list  = [['time1', 'rest1', 'name1'], 
                     ['time2', 'rest2', 'name2'], 
-                    ['time3', 'rest3', 'name3']]'''
-
+                    ['time3', 'rest3', 'name3']]
+    '''
     rs_list  = [['time1', 'rest1', 'name1'], 
                     ['time2', 'rest2', 'name2'], 
                     ['time3', 'rest3', 'name3'], 
@@ -107,19 +108,18 @@ if __name__ == '__main__':
                     ['time7', 'rest7', 'name7'], 
                     ['time8', 'rest8', 'name8'], 
                     ['time9', 'rest9', 'name9']]
+    '''
     #self.rs_list  = [['18:00-20:00', '麥當勞公館店', 'Amber, Rowan, Jay'], ['11:00-15:00', '辛殿', 'Rowan, Jay, Celest'], ['17:00-21:00', '順園小館', 'Celest, Rowan'],['15:00-18:00', '貳樓', 'Amber, Celest']]
-    rs_list  = []
     print(rs_list)
 
-
+    # rs_list = []
 
     def cb():
         page.hide()
     def result_over():
         page.hide()
 
-    page = ResultPage(win1, cb, result_over)
+    page = ResultPage(win1, cb, rs_list)
     #p1 = ResultPage(win1, lambda:p1.hide())
     page.show()
-
     win1.mainloop()
