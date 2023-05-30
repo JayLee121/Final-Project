@@ -7,12 +7,13 @@ class WeekPage:
         self.radiobuttons = []  # 儲存單選按鈕的列表
         self.selected_value = tk.StringVar(value=None)  # 儲存選中按鈕的值
         self.components = {
-            'bt': tk.Button(win, text='Save Selected', bg='#f2d5a3', command=self.cb),
-            'lb': tk.Label(win, text='\\  請選取打算在星期幾聚餐  /', font=('Arial', 30), bg='#f2d5a3'),
+            'bt': tk.Button(win, text='開始投票', font=('Arial', 16), bg='#f2d5a3', width=20, height=2, command=self.cb),
+            'lb': tk.Label(win, text='\\  要在星期幾聚餐  /', font=('Arial', 30, 'bold'), bg='#f2d5a3'),
         }
 
     def layout(self):
         self.components['bt'].place(anchor="center", relx=0.5, rely=0.8)
+
         self.components['lb'].place(anchor="center", relx=0.5, rely=0.2)
 
     def get_result(self):
@@ -25,8 +26,8 @@ class WeekPage:
         time_list = ['週一', '週二', '週三', '週四', '週五', '週六', '週日']
         for i in range(7):
             value = i + 1
-            radiobutton = tk.Radiobutton(self.win,text=time_list[i],bg='#f2d5a3',font=('Arial', 16),variable=self.selected_value, value=value,)
-            radiobutton.place(relx=0.245 + 0.075 * i, rely=0.285 + 0.05 * 3)  # 相對座標
+            radiobutton = tk.Radiobutton(self.win, text=time_list[i], bg='#f2d5a3', font=('Arial', 18), variable=self.selected_value, value=value,)
+            radiobutton.place(relx=0.245 + 0.075 * i, rely=0.5)  # 相對座標
             self.radiobuttons.append(radiobutton)
             self.selected_value.set(None)
     
