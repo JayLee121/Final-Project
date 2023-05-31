@@ -11,9 +11,10 @@ class ResultPage():
         self.rs_list = rs_list
         self.result_lbs = []
         self.components = {
-            'title': tk.Label(win, text='\\   聚餐結果   /', font=('Arail', 30, 'bold'), fg='black', bg='#f2d5a3', justify='center'),
-            'result_num': tk.Label(win, text=f'''總共有 {len(self.rs_list)} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 20), width=30, height=2),
-            'more_result': tk.Button(win, text='查看更多結果', bg='#e3d5ca', fg='black', font=('Arial', 16), width=20, height=2,
+            'title': tk.Label(win, text='\n 最終結果！\n', fg='black', bg='#f2d5a3', font=('Arial', 22), width=30, height=3,
+                              justify='center'),
+            'result_num': tk.Label(win, text=f'''總共有 {len(self.rs_list)} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 16), width=30, height=2),
+            'more_result': tk.Button(win, text='查看更多結果', bg='#e3d5ca', fg='black', font=('Arial', 12), width=20, height=2,
                                activebackground='black', activeforeground='yellow', command=self.show_more),
             'back_to_homepage': tk.Button(win, text='回首頁', bg='#e3d5ca', fg='black', font=('Arial', 16), width=20, height=2,
                                activebackground='black', activeforeground='yellow', command=self.cb)}
@@ -58,11 +59,11 @@ class ResultPage():
                     if (i+1) % 4 == 1:
                         result_lb.place(relx=0.25, rely=0.38+0.2*0)
                     elif (i+1) % 4 == 2:
-                        result_lb.place(relx=0.535, rely=0.38+0.2*0)
+                        result_lb.place(relx=0.55, rely=0.38+0.2*0)
                     elif (i+1) % 4 == 3:
                         result_lb.place(relx=0.25, rely=0.38+0.2*1) 
                     else:
-                        result_lb.place(relx=0.535, rely=0.38+0.2*1)
+                        result_lb.place(relx=0.55, rely=0.38+0.2*1)
                     
                     self.result_lbs.append(result_lb)
                     self.rs_list [i] = []  # 把已顯示過的結果轉為空的list

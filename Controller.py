@@ -59,9 +59,15 @@ def rest_over():
 
 
 def resultpg_cb():
-    global name＿list
+    global name_list
+    global available_time 
+    global rest_list
+    global result_list
     resultpg.hide()
     name_list = []
+    available_time = []
+    rest_list = []
+    result_list = []
     home.show()
 
 def algorithm (day ,time_p ,name_p ,site_p):
