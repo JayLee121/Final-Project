@@ -1,6 +1,3 @@
-
-
-
 def algorithm (day ,time_p ,name_p ,site_p):
     restaurant_data_dict = {
         1: '麥當勞公館店',
@@ -203,19 +200,13 @@ def algorithm (day ,time_p ,name_p ,site_p):
                 45: '22:00-22:30', 46: '22:30-23:00', 47: '23:00-23:30', 48: '23:30-24:00'}
     # try these
     # 之後這四個資料由前端傳入
-    
-    # name_p = ['Amber', 'Steve', 'Jay']
-    # name_p = ['123', '45678']
-    # time_p = [[25, 26], [26, 25, 27], [26, 25, 27]]
-    # time_p = [[14, 15, 21, 27, 28, 34, 40], [39, 34, 35, 23, 27]]
-    # site_p = [['麥當勞公館店'], ['麥當勞公館店', '順園小館'] , ['辛殿']]
 
 
 
 
 
     debug = True
-    time_proportion = 1/2
+    time_proportion = 2/3
     site_proportion = 1/3
 
     for i in range(len(time_p)):
@@ -242,5 +233,9 @@ def algorithm (day ,time_p ,name_p ,site_p):
     result_list = get_result_site(result_list, optimal_time, time_dict, site_dict, total_people, bus_hour_dict, time_data_dict)
     result_list = get_result_name(result_list, optimal_time, time_dict, site_dict, total_people, bus_hour_dict, time_data_dict)
     result_list = merged(result_list, time_data_dict)
+
     return result_list
     if debug: print('result_list:', result_list)
+
+print(algorithm(4,time_p = [[21, 22 , 23, 24, 25, 26], [23, 24, 25, 26, 27]] ,name_p = ['Amber', 'Steve'],site_p = [[1,2,3], [1,2,3,4,]] ))
+
