@@ -1,6 +1,7 @@
 # Controller
 import home_page, user_name, time_table, restaurant_place_image, week, result
 import tkinter as tk
+from PIL import Image, ImageTk
 
 debug = False
 name_list = []
@@ -324,5 +325,13 @@ if __name__ == '__main__':
     weekpg = week.WeekPage(win, weekpg_cb)
     name = user_name.UserName(win, name_cb)
     resultpg = result.ResultPage(win, resultpg_cb, result_list)
+
+    '''# 載入圖片並顯示在頁面上
+    image = Image.open("插圖.png")
+    photo = ImageTk.PhotoImage(image)
+    image_label = tk.Label(win, image=photo)
+    image_label.place(anchor="center", relx=0.5, rely=0.5)'''
+
     home.show()
     win.mainloop()
+    
