@@ -18,6 +18,7 @@ def home_cb():
 def weekpg_cb():
     global day
     day = weekpg.get_result()
+    name.set_name_list(name_list)
     weekpg.hide()
     name.show()
 
@@ -57,8 +58,9 @@ def rest_over():
 
 
 def resultpg_cb():
+    global name＿list
     resultpg.hide()
-    name.clear_name_list(name_list)
+    name_list = []
     home.show()
 
 def algorithm (day ,time_p ,name_p ,site_p):
@@ -223,7 +225,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
         
         
     def get_result_name(result_list, optimal_time, time_dict, site_dict, total_people, bus_hour_dict, time_data_dict):
-        if result_list == [['沒有能聚的時間', '']]: return [['沒有能聚的時間', '', '']]
+        if result_list == [['沒有能聚的時間', '']]: return []
         
         # 只有一個最佳時間
         if len(optimal_time) == 1:
@@ -275,8 +277,8 @@ def algorithm (day ,time_p ,name_p ,site_p):
 
 
     debug = True
-    time_proportion = 1/10
-    site_proportion = 1/10
+    time_proportion = 2/3
+    site_proportion = 1/3
 
     for i in range(len(time_p)):
         for j in range(len(time_p[i])):
