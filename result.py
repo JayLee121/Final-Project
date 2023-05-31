@@ -11,8 +11,7 @@ class ResultPage():
         self.rs_list = rs_list
         self.result_lbs = []
         self.components = {
-            'title': tk.Label(win, text='\\   聚餐結果   /', font=('Arail', 30, 'bold'), fg='black', bg='#f2d5a3', width=30, height=3,
-                              justify='center'),
+            'title': tk.Label(win, text='\\   聚餐結果   /', font=('Arail', 30, 'bold'), fg='black', bg='#f2d5a3', justify='center'),
             'result_num': tk.Label(win, text=f'''總共有 {len(self.rs_list)} 組最佳結果''', fg='black', bg='#f5ebe0', font=('Arial', 20), width=30, height=2),
             'more_result': tk.Button(win, text='查看更多結果', bg='#e3d5ca', fg='black', font=('Arial', 16), width=20, height=2,
                                activebackground='black', activeforeground='yellow', command=self.show_more),
