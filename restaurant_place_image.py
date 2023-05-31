@@ -16,14 +16,14 @@ class RestaurantPage:
                                 height=2, activebackground='black', activeforeground='yellow', command=self.cb),
                            'bt6':tk.Button(self.win, text='產生結果', font=('Arial', 16), width=20,
                                 height=2, activebackground='black', activeforeground='yellow', command=self.over),
-                           'lbtitle':tk.Label(self.win, text='\\   點餐廳名看菜單  /', fg='black', bg='#f2d5a3', font=('Arial', 30, "bold")),
+                           'lbtitle':tk.Label(self.win, text='\\ 點選你想去的餐廳 /', fg='black', bg='#f2d5a3', font=('Arial', 30, "bold")),
                            }
         self.links = [
-            {"text": "新生南路麥當勞", "url": "https://www.mcdonalds.com/tw/zh-tw/full-menu/extra-value-meals.html"},
-            {"text": "順園小館", "url": "https://www.facebook.com/media/set/?set=a.2412078992198401&type=3"},
-            {"text": "辛殿公館店", "url": "https://inline.app/booking/-LDKPhTT6bNhwjRVHpC2/-MWbDrcVGUuDMkYvCrz7"},
-            {"text": "鍋in", "url": "https://images.app.goo.gl/2kgAHR8RuKyQtQ118"},
-            {"text": "貳樓公館店", "url": "https://www.secondfloorcafe.com/menu/"}]
+            {"text": "看菜單", "url": "https://www.mcdonalds.com/tw/zh-tw/full-menu/extra-value-meals.html"},
+            {"text": "看菜單", "url": "https://www.facebook.com/media/set/?set=a.2412078992198401&type=3"},
+            {"text": "看菜單", "url": "https://inline.app/booking/-LDKPhTT6bNhwjRVHpC2/-MWbDrcVGUuDMkYvCrz7"},
+            {"text": "看菜單", "url": "https://images.app.goo.gl/2kgAHR8RuKyQtQ118"},
+            {"text": "看菜單", "url": "https://www.secondfloorcafe.com/menu/"}]
         
         self.load_images()
     
@@ -49,12 +49,12 @@ class RestaurantPage:
             for j in range(1):
                 checkbox_value = i + 1  # 計算複選框對應的值
                 checkbox = tk.Checkbutton(self.win, text=restaurant_list[checkbox_value-1], font=('Arial', 16), command=lambda value=checkbox_value: self.checkbox_clicked(value))
-                checkbox.place(relx=0.25, rely=0.15 + i * 0.14)  # 將複選框放置到指定的行和列
+                checkbox.place(relx=0.32, rely=0.27 + i * 0.12)  # 將複選框放置到指定的行和列
                 row.append(checkbox)
             self.checkboxes.append(row)
 
     def layout(self):
-        self.components['lbtitle'].place(relx=0.5, rely=0.1, anchor='center')
+        self.components['lbtitle'].place(relx=0.5, rely=0.175, anchor='center')
         self.components['bt5'].place(relx=0.4, rely=0.9, anchor='center')
         self.components['bt6'].place(relx=0.6, rely=0.9, anchor='center')
         self.create_checkboxes()
@@ -78,14 +78,14 @@ class RestaurantPage:
     def display_images(self):
         for i, image in enumerate(self.images):
             label = tk.Label(self.win, image=image)
-            label.place(relx=0.63, rely=0.15 + i * 0.14)
+            label.place(relx=0.57, rely=0.24 + i * 0.12)
             self.image_labels.append(label)
 
     def create_menu(self):
         # 創建菜單超連結
         for i, link in enumerate(self.links):
             label = tk.Label(self.win, text=link["text"], fg="black", cursor="hand2", bg='#f2d5a3', font=('Arial', 16, "bold"))
-            label.place(relx=0.45, rely=0.15 + i * 0.14)
+            label.place(relx=0.47, rely=0.27 + i * 0.12)
             label.bind("<Button-1>", lambda e, url=link["url"]: webbrowser.open_new(url))
             self.labels.append(label)
     
