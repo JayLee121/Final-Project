@@ -180,7 +180,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
     def get_result_name(result_list, opt_time, time_dict):
         ''' 產生result_list的第三步：
             找出能出席的人'''
-        if result_list == [['沒有能聚的時間', '']]: return [['沒有能聚的時間', '', '']]  # 沒有能聚的時間 人直接回傳空字串
+        if result_list == [['沒有能聚的時間', '']]: return []  # 沒有能聚的時間 人直接回傳空字串
         
         # 只有一個最佳時間
         if len(opt_time) == 1:

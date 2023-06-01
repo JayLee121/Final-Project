@@ -20,7 +20,9 @@ class ResultPage():
 
     def layout(self):
         self.components['title'].place(anchor="center", relx=0.5, rely=0.2)
-        self.components['result_num'].place(anchor="center", relx=0.5, rely=0.3)
+        if self.rs_list  != []:
+            self.components['result_num'].place(anchor="center", relx=0.5, rely=0.3)
+        
         
         #if len(self.rs_list) <= 4 or (len(self.rs_list) > 5 and self.rs_list[-1]== []) :
         if len(self.rs_list) <= 2 or (len(self.rs_list) > 3 and self.rs_list[-1]== []) :
@@ -44,10 +46,10 @@ class ResultPage():
 
         # 約不成
         if self.rs_list  == []:
-            result_lb = tk.Label(self.win, text='大家時間對不上，約不成了嗚嗚', fg='black', bg='#f8ecc9', font=('Arial', 16), width=30, height=6)
+            result_lb = tk.Label(self.win, text='大家時間對不上，約不成了嗚嗚', fg='black', bg='#f8ecc9', font=('Arial', 16), width=60, height=12)
             result_lb.place(anchor="center", relx=0.5, rely=0.5)
             self.result_lbs.append(result_lb)
- 
+
         # 約成
         else:
             for i in range(len(self.rs_list )):
