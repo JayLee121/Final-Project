@@ -180,7 +180,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
     def get_result_name(result_list, opt_time, time_dict):
         ''' 產生result_list的第三步：
             找出能出席的人'''
-        if result_list == [['沒有能聚的時間', '']]: return []  # 沒有能聚的時間 人直接回傳空字串
+        if result_list == [['沒有能聚的時間', '']]: return [['沒有能聚的時間', '', '']]  # 沒有能聚的時間 人直接回傳空字串
         
         # 只有一個最佳時間
         if len(opt_time) == 1:
@@ -274,7 +274,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
     # 這一段會產生一個dict key是餐廳 value是list 裡面裝開放的時間(用數字表示)
     bus_hour = {}  # business_hour
     bus_hour['新生南路麥當勞'] = cr_bus(15, 45)
-    if 4 == day:
+    if day == 4:
         bus_hour['順園小館'] = cr_bus(23, 28)
         for time in cr_bus(35, 42):
             bus_hour['順園小館'].append(time)
