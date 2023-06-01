@@ -85,7 +85,7 @@ class RestaurantPage:
         # 創建菜單超連結
         for i, link in enumerate(self.links):
             label = tk.Label(self.win, text=link["text"], fg="black", cursor="hand2", bg='#f2d5a3', font=('Arial', 16, "bold"))
-            label.place(relx=0.47, rely=0.27 + i * 0.12)
+            label.place(relx=0.48, rely=0.27 + i * 0.12)
             label.bind("<Button-1>", lambda e, url=link["url"]: webbrowser.open_new(url))
             self.labels.append(label)
     
