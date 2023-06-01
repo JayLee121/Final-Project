@@ -224,7 +224,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
             如果人都一樣就合併'''
 
         i = 0
-        while True:
+        while i < len(result_list):
             try:
                 ''' 條件的第一行：時間連續
                          第二行：餐廳一樣
@@ -237,11 +237,11 @@ def algorithm (day ,time_p ,name_p ,site_p):
                     result_list[i][0] = result_list[i][0][0:5]
                     result_list[i][0] += '-'
                     result_list[i][0] += result_list[i+1][0][-5:]
+                    result_list.pop(i+1)  # 把合併完沒用的時間（後面的）刪掉
 
-                # 沒有連續就跳出迴圈
+                # 沒有連續就判斷下一個
                 else:
-                    break
-                result_list.pop(i+1)  # 把合併完沒用的時間（後面的）刪掉
+                    i += 1
 
             # 沒有下一個 跳出迴圈
             except IndexError:
@@ -294,4 +294,4 @@ def algorithm (day ,time_p ,name_p ,site_p):
     result_list = merged(result_list, time_data)
     return result_list
 
-print(algorithm(4, time_p = [[22, 23, 24, 25], [23, 24, 25]], name_p = ['Amber', 'Steve'],site_p = [[1,2,3], [1,2,3,4,]]))
+print(algorithm(4, time_p = [[1, 2, 23, 24], [1, 2, 23, 24]], name_p = ['Amber', 'Steve'],site_p = [[1,2,3], [1,2,3,4,]]))
