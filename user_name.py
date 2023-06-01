@@ -8,7 +8,7 @@ class UserName():
             self.components = {
                 #'lb3_1': tk.Label(win, text='名字', fg='black', bg='#f5ebe0', font=('Arial', 16), width=20, height=2),
                 'et3': tk.Entry(win, show=None, width=20),
-                'lbtitle': tk.Label(win, text='\\  輸入你的名字  /', fg='black', bg='#f2d5a3', font=('Arial', 30, "bold"), width=30, height=3, justify='center'),
+                'lbtitle': tk.Label(win, text='\\  輸入你的名字  /', fg='black', bg='#f2d5a3', font=('Arial', 30, "bold"), justify='center'),
                 'lb3_4': tk.Label(win, text='已填好的人 (^o^)／', fg='black', bg='#f2d5a3', font=('Arial',16), width=30, height=2),
                 'bt3': tk.Button(win, text='下一頁', bg='#e3d5ca', fg='black', font=('Arial', 16), width=20,
                                 height=2, activebackground='black', activeforeground='yellow', command=self.cb),
@@ -22,10 +22,10 @@ class UserName():
     
     def layout(self):
         #self.components['lb3_1'].place(anchor="center", relx=0.42, rely=0.380)
-        self.components['et3'].place(anchor="center", relx=0.5, rely=0.3)
-        self.components['lbtitle'].place(anchor="center", relx=0.5, rely=0.2)
-        self.components['lb3_4'].place(anchor="center", relx=0.5, rely=0.425)
-        self.components['listbox_frame'].place(anchor="center", relx=0.5, rely=0.55) 
+        self.components['et3'].place(anchor="center", relx=0.5, rely=0.35)
+        self.components['lbtitle'].place(anchor="center", relx=0.5, rely=0.25)
+        self.components['lb3_4'].place(anchor="center", relx=0.5, rely=0.475)
+        self.components['listbox_frame'].place(anchor="center", relx=0.5, rely=0.6) 
         self.components['bt3'].place(anchor = "center", relx= 0.5, rely = 0.8)
         self.components['listbox'].pack(side="left", fill="y")
         self.components['scrollbar'].pack(side="right", fill="y")
@@ -51,7 +51,7 @@ class UserName():
     def set_name_list(self, name_list):
         self.name_list = name_list.copy()
     
-    def clear_name_list(self):
+    def clear_name_list(self, name_list):
         self.name_list = []
 
 
