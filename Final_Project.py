@@ -135,7 +135,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
                         accept_site.pop(0)
                 # 如果拿光光了 就代表都沒開 直接return
                 except IndexError:
-                    result_list[0].append('想要的餐廳剛好都沒有在此時段營業，請考慮其他餐廳～')
+                    result_list[0].append('餐廳此時沒開，請換一家～')
                     return result_list
 
             # 將結果弄到result_list
@@ -173,7 +173,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
             # 如果都沒有餐廳加入 就是沒有符合營業時間
             for i in range(len(result_list)):
                 if len(result_list[i]) == 1:
-                    result_list[i].append('想要的餐廳剛好都沒有在此時段營業，請考慮其他餐廳～')
+                    result_list[i].append('餐廳此時沒開，請換一家～')
             return result_list
 
 
@@ -186,7 +186,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
         if len(opt_time) == 1:
 
             # 如果餐廳沒有開 人直接回傳空字串
-            if result_list[0][1] == '想要的餐廳剛好都沒有在此時段營業，請考慮其他餐廳～':
+            if result_list[0][1] == '餐廳此時沒開，請換一家～':
                 result_list[0].append('')
 
             # 有開的話 就加入人
@@ -204,7 +204,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
             for i in range(len(opt_time)):
 
                 # 如果餐廳沒有開 人直接回傳空字串
-                if result_list[i][1] == '想要的餐廳剛好都沒有在此時段營業，請考慮其他餐廳～':
+                if result_list[i][1] == '餐廳此時沒開，請換一家～':
                     result_list[i].append('')
 
                 # 有開的話 就加入人
