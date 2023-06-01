@@ -9,12 +9,12 @@ class WeekPage:
         self.components = {
             'bt': tk.Button(win, text='開始投票', font=('Arial', 16), bg='#f2d5a3', width=20, height=2, command=self.cb),
             'lb': tk.Label(win, text='\\  要在星期幾聚餐  /', font=('Arial', 30, 'bold'), bg='#f2d5a3'),
+            'lbwarn': tk.Label(win, text='請選擇星期幾', font=('Arial', 16), fg='red', bg='#f2d5a3'),
         }
 
     def layout(self):
-        self.components['bt'].place(anchor="center", relx=0.5, rely=0.8)
-
-        self.components['lb'].place(anchor="center", relx=0.5, rely=0.2)
+        self.components['bt'].place(anchor="center", relx=0.5, rely=0.7)
+        self.components['lb'].place(anchor="center", relx=0.5, rely=0.3)
 
     def get_result(self):
         # 獲取選中按鈕的值
@@ -27,7 +27,7 @@ class WeekPage:
         for i in range(7):
             value = i + 1
             radiobutton = tk.Radiobutton(self.win, text=time_list[i], bg='#f2d5a3', font=('Arial', 18), variable=self.selected_value, value=value,)
-            radiobutton.place(relx=0.245 + 0.075 * i, rely=0.5)  # 相對座標
+            radiobutton.place(relx=0.245 + 0.075 * i, rely=0.5)
             self.radiobuttons.append(radiobutton)
             self.selected_value.set(None)
     
@@ -40,7 +40,6 @@ class WeekPage:
             button.place_forget()
         for _, item in self.components.items():
             item.place_forget()
-  
 
 if __name__ == '__main__':
     win = tk.Tk()

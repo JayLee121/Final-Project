@@ -4,18 +4,18 @@ class TimePage:
     def __init__(self, win, cb):
         self.win = win
         self.cb = cb
-        self.time_frame=tk.Frame(win, bg='#f2d5a3')
+        # self.time_frame=tk.Frame(win, bg='#f2d5a3')
         self.checkboxes = []  # 儲存複選框的列表
         self.selected_boxes = []  # 儲存選中複選框的值的列表
-        self.components = {'lb':tk.Label(self.time_frame, text='\\  請點選你有空的時間  /', font=('Arail', 30, 'bold'), bg='#f2d5a3'),
-                            'bt': tk.Button(self.time_frame, text='下一頁', bg='#e3d5ca', fg='black', font=('Arial', 16), width=20,
+        self.components = {'lb':tk.Label(win, text='\\  請點選你有空的時間  /', font=('Arail', 30, 'bold'), bg='#f2d5a3'),
+                            'bt': tk.Button(win, text='下一頁', bg='#e3d5ca', fg='black', font=('Arial', 16), width=20,
                                 height=2, activebackground='black', activeforeground='yellow', command=self.cb),                            }
 
     def layout(self):
         self.components['lb'].place(anchor="center", relx=0.5, rely=0.2)
         self.components['bt'].place(anchor="center", relx=0.5, rely=0.8)
         self.create_checkboxes()
-        self.time_frame.place(relx=0, relheight=1, relwidth=1)
+        #self.time_frame.place(relx=0, relheight=1, relwidth=1)
 
     def checkbox_clicked(self, checkbox_value):
         # 複選框點擊事件處理函數
@@ -47,7 +47,7 @@ class TimePage:
         for i in range(8):
             for j in range(6):
                 checkbox_value = i * 6 + j + 1
-                checkbox = tk.Checkbutton(self.time_frame, text=time_list[checkbox_value-1], bg='#f2d5a3', font=('Arial',16), command=lambda value=checkbox_value: self.checkbox_clicked(value))
+                checkbox = tk.Checkbutton(self.win, text=time_list[checkbox_value-1], bg='#f2d5a3', font=('Arial',16), command=lambda value=checkbox_value: self.checkbox_clicked(value))
                 
                 checkbox.place(relx=0.2+0.1*j, rely=0.31+0.05*i)  # 相對座標
 
@@ -59,7 +59,12 @@ class TimePage:
 
 
     def hide(self):
-        self.time_frame.place_forget()
+        for box in self.checkboxes:
+            box.place_forget()
+        for _, item in self.components.items():
+            item.place_forget()
+
+        # self.time_frame.place_forget()
 
 
 if __name__ == '__main__':
