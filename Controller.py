@@ -92,6 +92,28 @@ if __name__ == '__main__':
     image_label = tk.Label(win, image=photo)
     image_label.place(anchor="center", relx=0.5, rely=0.5)
     image_label.lower()"""
+    # 載入圖片並顯示在頁面上
+    image = Image.open("底圖5.png")
+    # 取得視窗大小
+    window_width, window_height = win.winfo_screenwidth(), win.winfo_screenheight()
+
+    # 計算底圖等比例縮放後的大小
+    image_width, image_height = image.size
+    aspect_ratio = max(window_width / image_width, window_height / image_height)
+    new_width = int(image_width * aspect_ratio)
+    new_height = int(image_height * aspect_ratio)
+
+    # 縮放底圖
+    image = image.resize((new_width, new_height), Image.ANTIALIAS)
+
+    # 將圖片裁剪為視窗大小
+    image = image.crop((0, 0, window_width, window_height))
+
+    # 將圖片轉換為Tkinter的PhotoImage物件
+    photo = ImageTk.PhotoImage(image)
+    image_label = tk.Label(win, image=photo)
+    image_label.place(anchor="center", relx=0.5, rely=0.5)
+    image_label.lower()
 
     home.show()
     win.mainloop()
