@@ -165,7 +165,7 @@ if __name__ == '__main__':
                     #['time9', 'rest9', 'name9']
                     ]
 
-    rs_list  = [['time1', '新生南路麥當勞,順園小館,辛殿公館店,鍋in,貳樓公館店', 'name1name1name1name1name1'], 
+    rs_list  = [['time1', '新生南路麥當勞,順園小館,辛殿公館店,鍋in,貳樓公館店   ', 'name1,name1.,name1name1name1'], 
                     ['time2', '新生南路麥當勞,順園小館,辛殿公館店', 'name2name2name2name2'], 
                     ['time3', '順園小館,辛殿公館店', 'name3name3name3name3name3name3'], 
                     # ['time4', 'rest4', 'name4'], 
@@ -177,7 +177,7 @@ if __name__ == '__main__':
                     ]
 
     #rs_list = []
-
+    # rs_list = [['00:00-01:30', ['辛殿公館店'], ['Jay', 'Justin', 'Amber']], ['17:00-17:30', ['辛殿公館店', '貳樓公館店'], ['Jay', 'Justin', 'Amber']]]
     def cb():
         page.hide()
     def result_over():

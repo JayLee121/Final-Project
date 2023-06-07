@@ -1,20 +1,20 @@
 # Controller
+
 import home_page, user_name, time_table, restaurant_place_image, week, result
 import tkinter as tk
-from PIL import Image, ImageTk
 import back_end
+from PIL import Image, ImageTk
 
 debug = False
 name_list = []
 available_time = []
 rest_list = []
 result_list = []
-day = None
 
 def home_cb():
     home.hide()
     weekpg.show()
-    if debug:print('home_cb')
+
 
 def weekpg_cb():
     global day
@@ -51,7 +51,8 @@ def rest_over():
     global resultpg
     rest_list.append(rest.get_selected_values())
     rest.hide()
-    result_list = back_end.merge_time(day, available_time , name_list, rest_list)
+    time_res_name = back_end.suggest_party(day, available_time , name_list, rest_list)
+    result_list = back_end.merge_time(time_res_name)
     resultpg = result.ResultPage(win, resultpg_cb, result_list)
     resultpg.show()
     if debug:print('rest_list:',rest_list)
@@ -68,10 +69,6 @@ def resultpg_cb():
     rest_list = []
     result_list = []
     home.show()
-
-
-
-
 
 
 if __name__ == '__main__':
@@ -118,5 +115,10 @@ if __name__ == '__main__':
 
     home.show()
     win.mainloop()
-    
-print(result_list,'result_list')
+
+
+
+# if debug:print(name_list,'name_list')
+# if debug:print(rest_list,'rest_list')
+# if debug:print(available_time , 'available_time ')
+# if debug:print(result_list,'result_list')

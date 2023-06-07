@@ -1,13 +1,8 @@
 # Back_end
-day = 4
-time_p = [[1,2,3,30,35], [1,2,3,30,35], [1,2,3,4,5,35]] 
-name_p = ['Jay', 'Justin', 'Amber']
-site_p =[[1,2,3,4,5],[1,3,5],[3,4,5]]
-
-
-res_data_dict = {1: '新生南路麥當勞',2: '順園小館',3: '辛殿公館店',4: '鍋in',5: '貳樓公館店'}
+debug = False
 time_proportion, restaurant_proportion = 2/3, 1/3
 
+    # 取得每個時間的投票情況（處理前端傳進來的資料）
 def get_time_votes(time_p, name_p):
     time_dict = {}
     for i in range(len(name_p)):
@@ -16,8 +11,10 @@ def get_time_votes(time_p, name_p):
                 if time not in time_dict: time_dict[time] = [user_name]
                 else: time_dict[time].append(user_name)
     return time_dict
-                
+
+    # 取得每個餐廳的投票情況 （處理前端傳進來的資料）           
 def get_restaurant_votes(name_p, site_p):
+    res_data_dict = {1: '新生南路麥當勞',2: '順園小館',3: '辛殿公館店',4: '鍋in',5: '貳樓公館店'}
     restaurant_dict = {}
     for i in range(len(name_p)):
         user_name = name_p[i]
@@ -27,6 +24,7 @@ def get_restaurant_votes(name_p, site_p):
                 else: restaurant_dict[restaurant].append(user_name)
     return restaurant_dict
 
+    # 查詢在指定日期以及時間(user選擇的）有營業的餐廳
 def query_restaurants(time_p, day):
     bus_hour = {}  # business_hour
     bus_hour['新生南路麥當勞'] = [[15, 45]]
@@ -37,24 +35,22 @@ def query_restaurants(time_p, day):
     bus_hour['鍋in'] = [[23, 48]]
     if day == 6 or day == 7 : bus_hour['貳樓公館店'] = [[19, 43]]
     else: bus_hour['貳樓公館店'] = [[21, 42]]
-
     open_restaurants = {}
     for restaurant, hours in bus_hour.items():
         for time in time_p:
             for hour_range in hours:
-                # print('hour_range[0]',hour_range[0],'time',time,'hour_range[1]',hour_range[1])
                 if hour_range[0] <= time <= hour_range[1]:
-                    if time not in open_restaurants.keys():
-                        open_restaurants[time] = [restaurant]
-                    else:
-                        open_restaurants[time].append(restaurant)
+                    if time not in open_restaurants.keys():open_restaurants[time] = [restaurant]
+                    else:open_restaurants[time].append(restaurant)
     return open_restaurants
     
+    # 建議聚餐時間和餐廳
 def suggest_party(day, time_p, name_p, site_p):
     total_people = len(name_p)
     all_time_users = get_time_votes(time_p, name_p)
+    if debug:print('all_time_users:', all_time_users)
     
-    # 產生(opt_time)最佳時間 [1,2,3,....]
+    # 產生最佳時間(opt_time)
     time_vote, opt_time = [], []
     find_opt_time = True
     for key in all_time_users.keys():
@@ -66,30 +62,34 @@ def suggest_party(day, time_p, name_p, site_p):
         opt_time.append(time_vote[0][0])
         most_time_vote = time_vote[0][1]
         for i in range (1, len(time_vote)):
+            # 判斷是否有同樣票數的時間
             if time_vote[i][1] == most_time_vote: opt_time.append(time_vote[i][0])
 
     restaurants_candidates = query_restaurants(opt_time, day)
+    if debug:print('restaurants_candidates:', restaurants_candidates)
     all_restaurant_users = get_restaurant_votes(name_p, site_p)
+    if debug: print('all_restaurant_users:', all_restaurant_users)
 
+    # 計算最佳餐廳，以及將最佳時間，最佳餐廳，以及參與者放入 time_rest_name 裡
+    # (最佳餐廳是由會參加的人中選擇出來的，並不是所有人)
     time_rest_name =[]
-    for time in opt_time: #(opt_time)最佳時間 [1,2,3,....]
+    for time in opt_time: # (opt_time)[1,2,3,....]
         user_list = all_time_users[time] # all_time_users = dict{time:[users]}
         restaurant_num_vote = []
         for restaurant in restaurants_candidates[time]: # restaurants_candidates = dict{time:[有營業的餐廳]}
-            restaurant_users_vote = len(all_restaurant_users[restaurant]) # all_restaurant_user = dict{restaurant:[users]}
-            if restaurant_users_vote >= most_time_vote * restaurant_proportion: restaurant_num_vote.append([restaurant, restaurant_users_vote])
-            else:continue
+
+            if restaurant in all_restaurant_users:
+                restaurant_users_vote = len(all_restaurant_users[restaurant])
+                if restaurant_users_vote >= most_time_vote * restaurant_proportion: restaurant_num_vote.append([restaurant, restaurant_users_vote])
+                else:continue
 
         restaurant_num_vote.sort(key = lambda x: x[1], reverse = True)
-
         restaurant_list = []
         for i in range (len(restaurant_num_vote)):
                 if restaurant_num_vote[i][1] == restaurant_num_vote[0][1]:restaurant_list.append(restaurant_num_vote[i][0])
         time_rest_name.append([time, restaurant_list, user_list])
 
     return time_rest_name
-
-
 
 
 time_data = {1: '00:00-00:30', 2: '00:30-01:00', 3: '01:00-01:30', 4: '01:30-02:00',
@@ -105,8 +105,8 @@ time_data = {1: '00:00-00:30', 2: '00:30-01:00', 3: '01:00-01:30', 4: '01:30-02:
                 41: '20:00-20:30', 42: '20:30-21:00', 43: '21:00-21:30', 44: '21:30-22:00',
                 45: '22:00-22:30', 46: '22:30-23:00', 47: '23:00-23:30', 48: '23:30-24:00'}
 
-def merge_time(day, time_p, name_p, site_p):
-    data = suggest_party(day, time_p, name_p, site_p)
+    # 判斷time_rest_name的時間是否有連續，有的話合併
+def merge_time(data):
     data = [[[item[0]], item[1], item[2]] for item in data]
     new = []
     time_rest_name = None
@@ -117,11 +117,13 @@ def merge_time(day, time_p, name_p, site_p):
         if time_rest_name is None or (time != time_rest_name[0][-1] + 1 or users_name != time_rest_name[2]):
             time_rest_name = [[row[0][0], row[0][0]], row[1], row[2]]
             new.append(time_rest_name)
-        
         else:time_rest_name[0][-1] = row[0][0]
 
+    # 將格式改為前端要的([[time,[restaurant1,...], [name1,nmae2..]].....])
     result = [[time_data[row[0][0]].split('-')[0] + "-" + time_data[row[0][-1]].split('-')[1], row[1], row[2]] for row in new]
-    return(result)
-
+    for item in result:
+        item[1] = ','.join(item[1])  
+        item[2] = ','.join(item[2])  
+    return result
 
 

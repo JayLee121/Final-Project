@@ -43,9 +43,6 @@ Hey! My dear friends!!!
 
 
 
-
-
-
 if __name__ == '__main__':
     win1 = tk.Tk()
     win1.geometry('1280x720')
