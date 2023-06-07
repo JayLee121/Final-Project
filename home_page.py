@@ -6,6 +6,8 @@ class HomePage():
     def __init__(self, win, cb):
         self.win = win
         self.cb = cb
+
+        # 建立元件
         self.components = {
             'title': tk.Label(win, text='\\   一起聚餐吧！  /', fg='black', bg='#f2d5a3', font=('Arial', 30, 'bold'), justify='center'),
             'start': tk.Button(win, text='START', bg='#e3d5ca', fg='black', font=('Arial', 14), width=20, height=2,
@@ -27,29 +29,31 @@ Hey! My dear friends!!!
 ''', fg='black', bg='#f5ebe0', font=('Arial', 18), justify='left', width=50),
         }
 
+    # 設定所有元件在視窗的位置
     def layout(self):
         self.components['title'].place(anchor="center", relx=0.5, rely=0.2)
         self.components['intro'].place(anchor="center", relx=0.5, rely=0.5)
         self.components['start'].place(anchor="center", relx=0.5, rely=0.8)
 
+    # 在視窗上顯示所有元件
     def show(self):
         self.layout()
         for _, item in self.components.items():
             item.place()
 
+    # 在視窗上隱藏所有元件
     def hide(self):
         for _, item in self.components.items():
             item.place_forget()
 
 
-
+# 為了讓頁面能夠單獨測試，且避免import時會執行以下程式碼
 if __name__ == '__main__':
     win1 = tk.Tk()
     win1.geometry('1280x720')
     win1.title('一起聚餐吧')
     win1.configure(bg='#f2d5a3')
     
-
     p1 = HomePage(win1, lambda:p1.hide())
     p1.show()
 

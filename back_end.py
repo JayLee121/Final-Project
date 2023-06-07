@@ -125,5 +125,4 @@ def merge_time(data):
         item[1] = ','.join(item[1])  
         item[2] = ','.join(item[2])  
     return result
-
-
+    

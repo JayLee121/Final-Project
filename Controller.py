@@ -1,8 +1,9 @@
 # Controller
+# 整合前後端的程式
 
-import home_page, user_name, time_table, restaurant_place_image, week, result
+import home_page, user_name, time_table, restaurant_place_image, week, result #(前端的程式)
+import back_end # (後端程式)
 import tkinter as tk
-import back_end
 from PIL import Image, ImageTk
 
 debug = False
@@ -11,6 +12,7 @@ available_time = []
 rest_list = []
 result_list = []
 
+# call_back
 def home_cb():
     home.hide()
     weekpg.show()
@@ -70,7 +72,7 @@ def resultpg_cb():
     result_list = []
     home.show()
 
-
+# 為了讓頁面能夠單獨測試，且避免import時會執行以下程式碼
 if __name__ == '__main__':
     win = tk.Tk()
     win.geometry('1280x720')
@@ -84,12 +86,7 @@ if __name__ == '__main__':
     name = user_name.UserName(win, name_cb)
     resultpg = result.ResultPage(win, resultpg_cb, result_list)
 
-    """# 載入圖片並顯示在頁面上
-    image = Image.open("底圖2.png")
-    photo = ImageTk.PhotoImage(image)
-    image_label = tk.Label(win, image=photo)
-    image_label.place(anchor="center", relx=0.5, rely=0.5)
-    image_label.lower()"""
+
     # 載入圖片並顯示在頁面上
     image = Image.open("底圖2.png")
     # 取得視窗大小
@@ -117,8 +114,8 @@ if __name__ == '__main__':
     win.mainloop()
 
 
-
-# if debug:print(name_list,'name_list')
-# if debug:print(rest_list,'rest_list')
-# if debug:print(available_time , 'available_time ')
-# if debug:print(result_list,'result_list')
+# debug用的，會將使用者輸入的資料印出來
+if debug:print(name_list,'name_list')
+if debug:print(rest_list,'rest_list')
+if debug:print(available_time , 'available_time ')
+if debug:print(result_list,'result_list')
