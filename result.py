@@ -24,8 +24,8 @@ class ResultPage():
             self.components['result_num'].place(anchor="center", relx=0.5, rely=0.3)
         
         
-        #if len(self.rs_list) <= 4 or (len(self.rs_list) > 5 and self.rs_list[-1]== []) :
-        if len(self.rs_list) <= 2 or (len(self.rs_list) > 3 and self.rs_list[-1]== []) :
+        #if len(self.rs_list) <= 4 or (len(self.rs_list) >= 5 and self.rs_list[-1]== []) :
+        if len(self.rs_list) <= 2 or (len(self.rs_list) >= 3 and self.rs_list[-1]== []) :
             self.components['back_to_homepage'].place(anchor="center", relx=0.5, rely=0.82)
         else:
             self.components['back_to_homepage'].place(anchor="center", relx=0.4, rely=0.82)
@@ -168,8 +168,8 @@ if __name__ == '__main__':
     rs_list  = [['time1', '新生南路麥當勞,順園小館,辛殿公館店,鍋in,貳樓公館店', 'name1name1name1name1name1'], 
                     ['time2', '新生南路麥當勞,順園小館,辛殿公館店', 'name2name2name2name2'], 
                     ['time3', '順園小館,辛殿公館店', 'name3name3name3name3name3name3'], 
-                    ['time4', 'rest4', 'name4'], 
-                    ['time5', 'rest5', 'name5'], 
+                    # ['time4', 'rest4', 'name4'], 
+                    # ['time5', 'rest5', 'name5'], 
                     #['time6', 'rest6', 'name6'], 
                     #['time7', 'rest7', 'name7'], 
                     #['time8', 'rest8', 'name8'], 

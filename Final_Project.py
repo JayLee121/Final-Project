@@ -1,25 +1,16 @@
+# 計算最佳的聚餐時間，跟聚餐地點
+
 def algorithm (day ,time_p ,name_p ,site_p):
-    res_data_dict = {
-        1: '新生南路麥當勞',
-        2: '順園小館',
-        3: '辛殿公館店',
-        4: '鍋in',
-        5: '貳樓公館店'
-    }
-
-
+    
     def get_time_dict(time_p, name_p):
-        ''' 產出key是時間字串 
-            value是list裡面是人名的dict'''
+        # 產出key是時間 ,value是人名的dict
 
         time_dict = {}
-        for i in range(len(time_p)):
+        for i in range(len(name_p)):
             for time in time_p[i]:
-
                 # 如果還沒有time這個key 創一個新的list並且丟進去
                 if time not in time_dict:
-                    time_dict[time] = []
-                    time_dict[time].append(name_p[i])
+                    time_dict[time] = [name_p[i]]
 
                 # 已經有了就直接丟進去
                 else:
@@ -28,12 +19,12 @@ def algorithm (day ,time_p ,name_p ,site_p):
 
 
     def get_site_dict(site_p, name_p):
-        ''' 產出key是人名
-            value是list裡面是餐廳的dict'''
+        # 產出key是人名, value是餐廳的dict
 
         site_dict = {}
-        for i in range(len(name_p)):
-            site_dict[name_p[i]] = site_p[i]
+        #for i in range(len(name_p)):
+        #   site_dict[name_p[i]] = site_p[i]
+        for i , v in enumerate (name_p):site_dict[v] = site_p[i]
         return site_dict
 
 
@@ -50,7 +41,7 @@ def algorithm (day ,time_p ,name_p ,site_p):
 
 
     def filter_prop(x_dict, prop, total_people):
-        ''' 看（時間或是人數）是否過一定比例'''
+        # 看（時間或是人數）是否過一定比例
 
         accept_x = []  # 可被接受的（時間或餐廳）
         for key in x_dict.keys():
@@ -62,24 +53,24 @@ def algorithm (day ,time_p ,name_p ,site_p):
     def find_opt(accept_x):
         ''' 從accept_x找出最佳值
             以及判斷是否有複數個最佳值'''
-
-        accept_x = (sorted(accept_x, key=lambda x: x[1], reverse=True))
         opt_x = []
+        accept_x = (sorted(accept_x, key=lambda x: x[1], reverse=True))
         opt_x.append(accept_x[0][0])  # 先加入最大的
         best_num_vote = accept_x[0][1]  # 記住他的人數
         for i in range (1, len(accept_x)):
             if accept_x[i][1] == accept_x[0][1]: opt_x.append(accept_x[i][0])  # 如果人數一樣就加入
-        return opt_x
+        return opt_x, best_num_vote
 
 
     def get_result_time(time_dict, total_people):
         ''' 產生result_list的第一步
             先產出最佳時間（可能一個或多個）
             如果多個的話就放在不同的list'''
-
+        find_time = True
         result_list = []
         accept_time = filter_prop(time_dict, time_prop, total_people)  # 可接受的時間
-        if len(accept_time) == 0: return [['沒有能聚的時間']], []  # 沒有可以聚的時間 直接回傳
+        # if len(accept_time) == 0: return [['沒有能聚的時間']], []  # 沒有可以聚的時間 直接回傳
+        if len(accept_time) == 0: find_time = False  # 沒有可以聚的時間 直接回傳
         if debug: print('accept_time:', accept_time)
         opt_time = find_opt(accept_time)  # 最佳時間
         if debug: print('opt_time:', opt_time)
@@ -261,6 +252,14 @@ def algorithm (day ,time_p ,name_p ,site_p):
                 37: '18:00-18:30', 38: '18:30-19:00', 39: '19:00-19:30', 40: '19:30-20:00',
                 41: '20:00-20:30', 42: '20:30-21:00', 43: '21:00-21:30', 44: '21:30-22:00',
                 45: '22:00-22:30', 46: '22:30-23:00', 47: '23:00-23:30', 48: '23:30-24:00'}
+    
+    res_data_dict = {
+        1: '新生南路麥當勞',
+        2: '順園小館',
+        3: '辛殿公館店',
+        4: '鍋in',
+        5: '貳樓公館店'
+    }
     # -------------------------------------------------------------------------------------
     debug = True
     time_prop = 2/3  # 時間接受的比例
